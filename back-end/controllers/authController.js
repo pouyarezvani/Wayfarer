@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt'); // passwords secure
 const validate = require('../validation/register');
+
 const db = require('../models');
 
 function signup(req, res) {

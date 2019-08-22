@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = { 
     auth: require('./auth'),
     users: require('./users'), 
     cities: require('./cities'),
