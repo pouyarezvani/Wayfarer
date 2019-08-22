@@ -19,8 +19,7 @@ function signup(req, res) {
         bcrypt.genSalt(10, (err, salt) => {
             if(err) return res.status(500).json({
                 status: 500,
-                message: 'Something went wrong. Please try again.'
-            });
+                message: 'Something went wrong. Please try again.' });
     
             bcrypt.hash(req.body.password, salt, (err, hash) => {
                 if(err) return res.status(500).json({
@@ -37,8 +36,7 @@ function signup(req, res) {
                 db.User.create(newUser, (err, savedUser) => {
                     if(err) return res.status(500).json({
                         status: 500,
-                        message: err
-                    });
+                        message: err });
                     res.status(200).json({ status: 201, message: 'SUCCESS!' });
                 });
             });
@@ -49,38 +47,37 @@ function signup(req, res) {
 
 function login(req, res) {
     if (!req.body.email || !req.body.password) {
-        return res.status(400).json({ status: 400, })
+        return res.status(400).json({ status: 400, message: 'Please enter your email and password' });
     }
 
-    db.User.findOne(req.username, (err, user) => {
+    db.User.findOne({ email: req.username}, (err, foundUser) => {
         if(err) return res.status(500).json({
-            message: "mongoose ran into a problem while searching for a user",
-            error: err
-        });
+            message: "Something went wrong. Please try again",
+            error: err });
 
-        if(!user) return res.status(401).json({
-            message: "invalid credentials"
-        });
+        if(!foundUser) return res.status(400).json({
+            message: "Email or password is incorrect" });
 
-        bcrypt.compare(req.body.password, user.password, (err, same) => {
+        bcrypt.compare(req.body.password, foundUser.password, (err, isMatch) => {
             if(err) return res.status(500).json({
-                message: "bcrypt ran into a problem while comparing passwords",
-                error: err
-            });
+                status: 500,
+                message: "Something went wrong. Please try again" });
 
-            if(same) {
-                user = { _id: user._id, username: user.username };
-                req.session.authenticated = true;
-                req.session.user = user;
-                return res.json({ user });
+            if(isMatch) {
+                req.session.loggedIn = true;
+                req.session.currentUser = { id: foundUser._id };;
+                return res.status(200).json({ status: 200, message: 'Success', id: foundUser._id });
             } else {
-                return res.status(401).json({
-                    message: "invalid credentials"
-                });
+                return res.status(400).json({
+                    status: 400,
+                    message: "Email or password is incorrect" });
             }
         });
-    })
-}
+    });
+};
+
+
+
 
 module.exports = {
     signup,
