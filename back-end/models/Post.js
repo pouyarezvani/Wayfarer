@@ -28,9 +28,8 @@ const PostSchema = new Schema({
     date_posted: {
         type: Date,
         default: Date.now
-    }
-
-
+    }, 
+    comments: [Comment.schema]
 });
 
 module.exports = mongoose.model('Post', PostSchema);
