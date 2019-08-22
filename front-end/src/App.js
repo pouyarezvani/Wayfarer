@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 // internal components
 import NavBar from './components/NavBar/NavBar';
 import Routes from './config/routes'
@@ -14,4 +14,4 @@ function App() {
   );
 }
 
-export default withRouter(App);
+export default App;

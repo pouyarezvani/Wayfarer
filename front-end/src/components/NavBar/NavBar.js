@@ -4,6 +4,9 @@ import './NavBar.css';
 
 const NavBar = () => {
     const links = (
+        <div className="logo">
+            <Link exact to="/"><h1>Wayfarer</h1></Link>
+        </div>
         <div className="nav-items">
             <li>
                 <NavLink to="/cities">Cities</NavLink>
@@ -18,10 +21,6 @@ const NavBar = () => {
     )
     return (
         <nav>
-
-            <div className="logo">
-                <Link exact to="/"><h1>Wayfarer</h1></Link>
-            </div>
             {links}
         </nav>
     )
