@@ -1,5 +1,4 @@
-const bcrypt = require('bcrypt'); // passwords secure
-
+const bcrypt = require('bcrypt'); 
 const db = require('../models');
 
 function signup(req, res) {
