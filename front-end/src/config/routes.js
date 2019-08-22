@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 // internal components
 import CitiesContainer from '../containers/CitiesContainer/CitiesContainer';
 import ProfileContainer from '../containers/ProfileContainer/ProfileContainer';
-import Post from "../components/CityPosts/Posts/Post/Post"
+import PostContainer from '../containers/PostContainer/PostContainer'
 import Home from '../pages/Home/Home';
 
 
