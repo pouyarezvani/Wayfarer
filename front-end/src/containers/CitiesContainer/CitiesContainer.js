@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
 // internal components
 import Aside from '../../components/Aside/Aside';
 import CityPosts from '../../components/CityPosts/CityPosts';
