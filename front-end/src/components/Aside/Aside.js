@@ -8,8 +8,8 @@ import './Aside.css';
 const Aside = ({ cities }) => {
     const citiesArr = cities.map(city => {
         return (
-            <Link key={city.id} to={`/cities/${city.name}`} >
-                <City key={city.id} name={city.name} image={city.imageUrl} />
+            <Link key={city.id} to={`/cities/${city.cityName}`} >
+                <City key={city.id} cityName={city.cityName} image={city.imageUrl} />
             </Link>
         )
     })
