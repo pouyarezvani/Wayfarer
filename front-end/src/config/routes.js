@@ -11,7 +11,7 @@ const Routes = () => {
     return (
         <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/post/:id" render={props => <Post {...props} id={props.match.params.id} />} />
+            <Route path="/post/:id" render={props => <PostContainer {...props} id={props.match.params.id} />} />
             <Route path="/cities/:city_name" render={(props) => <CitiesContainer {...props} cityName={props.match.params.city_name} />} />
             <Route path="/cities" component={CitiesContainer} />
             <Route path="/profile" component={ProfileContainer} />
