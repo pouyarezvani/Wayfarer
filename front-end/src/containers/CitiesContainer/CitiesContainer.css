@@ -1,0 +1,16 @@
+.cities-container{
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+}
+
+.aside{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    height: 100vh;
+    border: 1px solid black; 
+}
+
+.city-posts{
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
