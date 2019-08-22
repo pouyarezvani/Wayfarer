@@ -48,6 +48,10 @@ function signup(req, res) {
 };
 
 function login(req, res) {
+    if (!req.body.email || !req.body.password) {
+        return res.status(400).json({ status: 400, })
+    }
+
     db.User.findOne(req.username, (err, user) => {
         if(err) return res.status(500).json({
             message: "mongoose ran into a problem while searching for a user",
