@@ -2,13 +2,13 @@ import React from 'react';
 // styles
 import './City.css'
 
-const City = props => {
+const City = ({ name, image }) => {
     return (
         <div className="city-card">
             <div>
-                <p>Name:<strong>{props.cityName}</strong></p>
+                <p>Name:<strong>{name}</strong></p>
             </div>
-            <img src={props.imageUrl} alt="city-container" />
+            <img src={image} alt="city-container" />
         </div>
     )
 }
