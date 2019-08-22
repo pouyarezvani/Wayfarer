@@ -24,7 +24,7 @@ class CitiesContainer extends Component {
             {
                 name: 'San Francisco',
                 title: "Fun time in San Francisco",
-                user: this.state.user[0]
+              
             }
         ]
     }
