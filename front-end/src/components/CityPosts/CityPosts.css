@@ -30,7 +30,8 @@
     grid-template-columns: 1fr 5fr;
     border: 1px solid black;
     border-radius: 5px;
-    margin: 0 2em;
+    margin: 1em 2em;
+
 }
 
 .post-box-image {
