@@ -5,10 +5,10 @@ import Posts from './Posts/Posts';
 // Styles
 import './CityPosts.css';
 
-const CityPosts = ({ posts, users }) => {
+const CityPosts = ({ posts, users, name, image }) => {
     return (
         <>
-            <CityHeader />
+            <CityHeader name={name} image={image} />
             <div className="posts-header">
                 <h2>Posts</h2>
                 <button className="post-btn"><span>+</span></button>

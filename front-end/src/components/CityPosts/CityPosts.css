@@ -7,6 +7,10 @@
 .city-image {
     margin-top: 2em;
 }
+.city-image img{
+    height:30vh;
+    width: 40vw;
+}
 
 .posts-header {
     display: flex;

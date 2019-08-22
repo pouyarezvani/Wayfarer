@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 // internal components
 import Aside from '../../components/Aside/Aside';
 import CityPosts from '../../components/CityPosts/CityPosts';
-import CityContainerRoutes from '../../config/cityContainerRoutes';
 // styles
 import './CitiesContainer.css'
 
@@ -52,11 +52,31 @@ class CitiesContainer extends Component {
                 content: "It was raining too much :(",
                 imageUrl: "https://i.stack.imgur.com/34AD2.jpg"
             }
-        ]
+        ],
+
+        cityAsProp: {}
     }
 
+    componentDidMount() {
+        if (this.props.name) {
+            return this.sendCityProp();
+        }
 
+    }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.name !== this.props.name) {
+            this.sendCityProp();
+        }
+    }
+
+    sendCityProp = () => {
+        this.state.cities.forEach(city => {
+            if (city.name === this.props.name) {
+                this.setState({ cityAsProp: city })
+            }
+        })
+    }
 
     render() {
         return (
@@ -65,12 +85,20 @@ class CitiesContainer extends Component {
                     <Aside cities={this.state.cities} />
                 </div>
                 <div className="city-posts">
-                    {/* <CityContainerRoutes /> */}
-                    <CityPosts
-                        posts={this.state.posts}
-                        cities={this.state.cities}
-                        users={this.state.users}
-                    />
+                    {this.props.name
+                        ? <CityPosts
+                            name={this.state.cityAsProp.name}
+                            image={this.state.cityAsProp.imageUrl}
+                            posts={this.state.posts}
+                            cities={this.state.cities}
+                            users={this.state.users}
+                        />
+                        : <CityPosts
+                            name={this.state.cities[0].name}
+                            image={this.state.cities[0].imageUrl}
+                            posts={this.state.posts} />}
+
+
                 </div>
 
             </div>
