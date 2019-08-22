@@ -6,9 +6,10 @@ const authRequired = require('../middleware/authRequired');
 // Endpoint : 'api/v1/cities'
 
 //User Profile
-// router.get('./:slug', authRequired, ctrl.users.show);
-// router.get('/', ctrl.users.index);
-// router.get('./:slug/edit', authRequired, ctrl.users.edit);
-// router.get('./:slug/delete', authRequired, ctrl.users.delete);
+router.get('./:city_id', ctrl.city.show);
+router.get('/', ctrl.city.index);
+router.put('./:city_id', authRequired, ctrl.city.edit);
+router.delete('./:slug', authRequired, ctrl.city.delete);
+router.post('/', authRequired, ctrl.city.create),
 
 module.exports = router;
