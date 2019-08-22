@@ -1,10 +1,12 @@
 import React from 'react';
+// internal components
+import NavBar from './components/NavBar/NavBar';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <h1>Wayfarer</h1>
+      <NavBar />
     </div>
   );
 }
