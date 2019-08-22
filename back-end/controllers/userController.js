@@ -2,21 +2,21 @@ const db = require('../models');
 
 
 module.exports = {
-    showUser: (req, res) => {
+    show: (req, res) => {
         db.User.findOne(req.params.username, { password: 0, _v: 0 }, (err, foundUser) => {
             if (err) return res.status(500).json({ status: 500, message: 'Something went wrong. Please try again.' });
             res.status(200).json({ status: 200, data: foundUser });
         });
     },
 
-    indexUsers: (req, res) => {
+    index: (req, res) => {
         db.User.find({}, { password: 0, _v: 0 }, (err, allUsers) => {
             if (err) return res.status(500).json({ status: 500, message: 'Something went wrong. Please try again.' });
             res.status(200).json({ status: 200, data: allUsers });
         });
     },
 
-    deleteUser: (req, res) => {
+    delete: (req, res) => {
         db.User.findOneAndDelete(
             { name: req.params.name },
             ( error, deletedUser ) => {
