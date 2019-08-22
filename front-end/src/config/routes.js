@@ -12,6 +12,7 @@ const Routes = () => {
         <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/cities" component={CitiesContainer} />
+            <Route path="/cities/:name" render={(props) => <CitiesContainer {...props} name={props.match.params.name} />} />
             <Route path="/profile" component={ProfileContainer} />
         </Switch>
     )
