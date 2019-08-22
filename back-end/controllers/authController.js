@@ -83,10 +83,15 @@ const logout = (req, res) => {
     });
 };
 
-
+const verify = (req, res) => {
+    if (!req.session.currentUser) return res.status(401).json({ status: 401, message: 'Unauthorized. Please try again.' });
+    res.status(200).json({ status: 200, message: 'Current User Verified.' });
+}
 
 
 module.exports = {
     signup,
-    login
+    login,
+    logout,
+    verify
 };
