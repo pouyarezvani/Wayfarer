@@ -23,17 +23,17 @@ class CitiesContainer extends Component {
         posts: [
             {
                 name: 'San Francisco',
-                title: "Fun time in San Francisco",
+                content: "Fun time in San Francisco",
                 imageUrl: "https://i.stack.imgur.com/34AD2.jpg"
             },
             {
                 name: 'Austin',
-                title: "I had some good ass food in Texas bro",
+                content: "I had some good ass food in Texas bro",
                 imageUrl: "https://i.stack.imgur.com/34AD2.jpg"
             },
             {
                 name: 'Seattle',
-                title: "It was raining too much :(",
+                content: "It was raining too much :(",
                 imageUrl: "https://i.stack.imgur.com/34AD2.jpg"
             }
         ]
