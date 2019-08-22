@@ -5,7 +5,7 @@ import Posts from './Posts/Posts';
 // Styles
 import './CityPosts.css';
 
-const CityPosts = () => {
+const CityPosts = ({ posts, users }) => {
     return (
         <>
             <CityHeader />
@@ -13,7 +13,7 @@ const CityPosts = () => {
                 <h2>Posts</h2>
                 <button className="post-btn"><span>+</span></button>
             </div>
-            <Posts />
+            <Posts posts={posts} users={users} />
         </>
     );
 };
