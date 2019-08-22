@@ -58,9 +58,9 @@ class CitiesContainer extends Component {
     }
 
     componentDidMount() {
-        if (this.props.name) {
+        // if (this.props.name) {
             return this.sendCityProp();
-        }
+        // }
 
     }
 
