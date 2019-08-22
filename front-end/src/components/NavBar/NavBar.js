@@ -20,7 +20,7 @@ const NavBar = () => {
         <nav>
 
             <div className="logo">
-                <h1>Wayfarer</h1>
+                <Link exact to="/"><h1>Wayfarer</h1></Link>
             </div>
             {links}
         </nav>
