@@ -6,6 +6,14 @@ import CityPosts from '../../components/CityPosts/CityPosts';
 import './CitiesContainer.css'
 
 class CitiesContainer extends Component {
+    state = {
+        posts: [],
+        users: [{
+            username: 'Pouya',
+            city: 'San Francisco',
+        }]
+    }
+
     render() {
         return (
             <div className="cities-container">
@@ -13,7 +21,7 @@ class CitiesContainer extends Component {
                     <Aside />
                 </div>
                 <div className="city-posts">
-                    <CityPosts />
+                    <CityPosts posts={this.state.posts} />
                 </div>
 
             </div>
