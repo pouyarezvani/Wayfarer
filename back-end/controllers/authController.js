@@ -1,37 +1,51 @@
 const bcrypt = require('bcrypt'); // passwords secure
-
+const validate = require('../validation/register');
 const db = require('../models');
 
 function signup(req, res) {
-    bcrypt.genSalt(10, (err, salt) => {
-        if(err) return res.status(500).json({
-            message: 'bcrypt ran into a problem while generating a salt',
-            error: err
-        });
+    const { errors, notValid } = validate(req.body);
 
-        bcrypt.hash(req.body.password, salt, (err, hash) => {
+    if (notValid) {
+        return res.status(400).json({ status: 400, errors });
+    }
+
+    db.User.findOne({ email: req.body.email }, (err, foundUser) => {
+        if (err) {
+            return res.status(500).json({ status: 500, message: 'Something went wrong. Please try again.' });
+        }
+        if (foundUser) {
+            return res.status(400).json({ status: 400, message: 'Email address has already been registered. Please try again.' });
+        }
+        bcrypt.genSalt(10, (err, salt) => {
             if(err) return res.status(500).json({
-                message: 'bcrypt ran into a problem while generating a hash',
-                error: err
+                status: 500,
+                message: 'Something went wrong. Please try again.'
             });
-
-            const newUser = {
-                username: req.body.username,
-                password: hash
-            };
-
-            db.User.create(newUser, (err, user) => {
+    
+            bcrypt.hash(req.body.password, salt, (err, hash) => {
                 if(err) return res.status(500).json({
-                    message: 'mongoose ran into a problem while creating a new user',
-                    error: err
+                    status: 500,
+                    message: 'Something went wrong. Please try again.'
                 });
-
-                user = { _id: user._id, username: user.username };
-                return res.json({ user });
+    
+                const newUser = {
+                    username: req.body.username,
+                    email: req.body.email,
+                    password: hash
+                };
+    
+                db.User.create(newUser, (err, savedUser) => {
+                    if(err) return res.status(500).json({
+                        status: 500,
+                        message: err
+                    });
+                    res.status(200).json({ status: 201, message: 'SUCCESS!' });
+                });
             });
-        });
+
+        })
     });
-}
+};
 
 function login(req, res) {
     db.User.findOne(req.username, (err, user) => {
