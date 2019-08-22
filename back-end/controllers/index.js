@@ -1,4 +1,6 @@
-module.exports = { // require a folder require a index file, way of making a object of contents of a folder
+module.exports = { 
     auth: require('./authController'),
-    user: require('./userController')
+    user: require('./userController'), 
+    city: require('./cityController'),
+    post: require('./postController')
 };
