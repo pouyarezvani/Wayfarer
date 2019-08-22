@@ -6,14 +6,10 @@ import City from '../City/City';
 import './Aside.css';
 
 const Aside = ({ cities }) => {
-    const handleClick = event => {
-        console.log(event)
-    }
-
     const citiesArr = cities.map(city => {
         return (
             <Link key={city.id} to={`/cities/${city.name}`} >
-                <City key={city.id} name={city.name} image={city.imageUrl} onClick={handleClick} />
+                <City key={city.id} name={city.name} image={city.imageUrl} />
             </Link>
         )
     })

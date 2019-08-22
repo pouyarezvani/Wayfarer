@@ -1,14 +1,13 @@
 import React from 'react';
 
-const CityHeader = () => {
+const CityHeader = ({ name, image }) => {
     return (
         <section className="city-header">
             <div className="city-name">
-                <h2>London</h2>
-                <h5>United Kingdom</h5>
+                <h2>{name}</h2>
             </div>
             <div className="city-image">
-                <img src="#" alt="city" />
+                <img src={image} alt="city" />
             </div>
         </section>
     );
