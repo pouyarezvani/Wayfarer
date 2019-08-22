@@ -5,10 +5,11 @@ const authRequired = require('../middleware/authRequired');
 
 // Endpoint => 'api/v1/posts'
 
-// router.get('/', authRequired, ctrl.post.index);
-// router.get('/:slug', authRequired, ctrl.post.show);
-// router.get('/:slug/edit', authRequired, ctrl.post.edit);
-// router.get('/:slug/delete', authRequired, ctrl.post.delete);
-// router.get('/:slug/edit', authRequired, ctrl.post.edit);
+//Posts Route
+router.get('./:post_id', ctrl.post.show);
+router.get('/', ctrl.post.index);
+router.put('./:post_id', authRequired, ctrl.post.edit);
+router.delete('./:post_id', authRequired, ctrl.post.delete);
+router.post('/', authRequired, ctrl.post.create),
 
 module.exports = router;
