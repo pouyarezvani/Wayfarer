@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // internal components
 import Aside from '../../components/Aside/Aside';
 import CityPosts from '../../components/CityPosts/CityPosts';
+import CityContainerRoutes from '../../config/cityContainerRoutes';
 // styles
 import './CitiesContainer.css'
 
@@ -55,6 +56,8 @@ class CitiesContainer extends Component {
     }
 
 
+
+
     render() {
         return (
             <div className="cities-container">
@@ -62,7 +65,12 @@ class CitiesContainer extends Component {
                     <Aside cities={this.state.cities} />
                 </div>
                 <div className="city-posts">
-                    <CityPosts posts={this.state.posts} cities={this.state.cities} users={this.state.users} />
+                    {/* <CityContainerRoutes /> */}
+                    <CityPosts
+                        posts={this.state.posts}
+                        cities={this.state.cities}
+                        users={this.state.users}
+                    />
                 </div>
 
             </div>
