@@ -1,29 +1,57 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const cors = require('cors');
 const app = express();
-
-require('dotenv').config();
-
-const db = require('./models');
+const PORT = process.env.PORT || 4000;
 const routes = require('./routes');
+// require('dotenv').config();
 
+// --------------------- MIDDLEWARE --------------------- //
+
+
+// BodyParser
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+// Custom Logger Middleware
+app.use((req, res, next) => {
+    const url = req.url;
+    const method = req.method;
+    const requestedAt = new Date().toLocaleString();
+    console.table({ url, method, requestedAt });
+    next();
+})
+
+// User Sessions
 app.use(session({
     secret: 'i like waffles',
     resave: false,
     saveUninitialized: false
 }));
 
-app.use((req, res, next) => {
-    console.log(req.session.user);
-    next();
+const corsOptions = {
+    origin: ['http://localhost:3000'],
+    credentials: true,
+    optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions));
+
+  // --------------------- ROUTES --------------------- //
+
+//  Get Root Route
+app.get('/', (req, res) => {
+    res.send('<h1>Welcome to WAYFARER</h1>');
 });
 
-app.use('/api/auth', routes.auth);
-app.use('/api/users', routes.users);
+// API Routes
+app.use('/api/v1/auth', routes.auth);
+app.use('/api/v1/users', routes.users);
+app.use('/api/v1/posts', routes.posts);
+app.use('/api/v1/cities', routes.cities);
 
-app.listen(3001, () => {
-    console.log('express listening from port 3001');
+
+// --------------------- START SERVER --------------------- //
+app.listen(PORT, () => {
+    console.log(`Server listening at http://localhost:${PORT}`);
 });

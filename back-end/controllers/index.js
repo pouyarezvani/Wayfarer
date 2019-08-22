@@ -2,6 +2,5 @@ module.exports = { // require a folder require a index file, way of making a obj
     auth: require('./authController'),
     user: require('./userController'), 
     city: require('./cityController'),
-    post: require('./postController'),
-    comment: require('./commentController')
+    post: require('./postController')
 };
