@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+
+import './Login.css'
 // import { API_URL } from '../../constants';
 
 class Login extends Component {
     state = {
         email: '',
         password: '',
-        error: null, 
+        error: null,
     };
 
     handleChange = (event) => {
@@ -27,8 +30,10 @@ class Login extends Component {
         return (
             <div className="login-row">
                 <section id="login" className="alert">
-                    { this.state.error }
+                    {this.state.error}
                     <h1>Login</h1>
+                    <Link to="/"><button>X</button></Link>
+
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="email">Email</label>

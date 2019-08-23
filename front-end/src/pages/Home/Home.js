@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+// internal components
+import Login from '../../components/Auth/Login/Login';
 import './Home.css';
 class Home extends Component {
     state = {
@@ -15,7 +17,7 @@ class Home extends Component {
         'https://images.unsplash.com/photo-1556767302-9cc8328e12f5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1491&q=80'
     ]
     setBackgroundImage = () => {
-        let i = 0;
+        let i = this.state.index;
         setInterval(() => {
             this.setState({
                 index: i++,
@@ -25,19 +27,43 @@ class Home extends Component {
             }
         }, 3000)
     }
+
+    incrementCarousel = () => {
+        if (this.state.index !== this.images.length - 1) {
+            clearInterval()
+            this.setState((prevstate) => { index: prevstate.index++ }, () => {
+                console.log(this.state.index)
+                this.forceUpdate()
+            })
+        } else {
+            this.setState({ index: 0 }, () => this.forceUpdate());
+        }
+
+    }
+    decrementCarousel = () => {
+        if (this.state.index !== -1) {
+            this.setState({ index: this.state.index-- })
+            console.log('click', this.state.index)
+        } else {
+            this.state.index = this.images.length - 1;
+        }
+
+    }
     render() {
-        console.log(this.state.index)
+        console.log('rerender?');
         return (
             <div className="home-body">
                 <section className="home-carousel">
                     <div className="carousel-image-container">
                         <img className="carousel-image" src={this.images[this.state.index]} alt="picture of city" />
-                        <button>Prev</button>
-                        <button>Next</button>
+                        <button onClick={this.decrementCarousel} >Prev</button>
+                        <button onClick={() => this.incrementCarousel()} >Next</button>
                     </div>
-
-
                 </section>
+                {this.props.login
+                    ? <Login />
+                    : null
+                }
                 <div className="main">
                     <h3>Wayferer is..</h3>
                     <section className="home-content">
