@@ -1,15 +1,29 @@
 nav{
-    background-color: orange;
+    background-color: black;
     display: flex;
     justify-content: space-between;
+
 }
 
 nav h1{
     padding:.5em;
+}
+.nav-li {
+    color: white;
+}
+.nav-li:hover { 
+    color: orange;
 }
 
 .nav-items{
     display: flex;
     justify-content: flex-end;
     align-items: baseline;
+ 
+}
+.nav-items li { 
+    list-style: none;
+    padding: .5em;
+    margin-right: 2em;
+    margin-top: .5em;
 }
