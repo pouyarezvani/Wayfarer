@@ -18,7 +18,6 @@ const NavBar = () => {
     )
     return (
         <nav>
-
             <div className="logo">
                 <Link to="/" ><h1>Wayfarer</h1></Link>
             </div>
