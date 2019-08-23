@@ -18,13 +18,13 @@ class Login extends Component {
         });
     };
 
-    // handlleSubmit = (event) => {
-    //     event.preventDefault();
-    //     const userInfo = this.state;
-    //     axios.post(`${API_URL}/auth/login`, userInfo, { withCredentials: true })
-    //         .then(res => this.props.setCurrentUser(res.data.id))
-    //         .catch(err => this.setState({ error: err.response.data.message }));
-    // };
+    handlleSubmit = (event) => {
+        event.preventDefault();
+        const userInfo = this.state;
+        axios.post(`${API_URL}/auth/login`, userInfo, { withCredentials: true })
+            .then(res => this.props.setCurrentUser(res.data.id))
+            .catch(err => this.setState({ error: err.response.data.message }));
+    };
 
     render() {
         return (
