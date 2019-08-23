@@ -2,8 +2,22 @@
     display: flex;
     justify-content: space-between;
     width: 30vw;
-    border: 1px solid black;
-    margin-bottom: 1em ;
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 5px;
+    margin-bottom: 1em;
+}
+
+.city-card p{
+    padding: 0 1em;
+}
+
+.city-card:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: box-shadow .9s ease-in-out;
+}
+
+.city-card:hover::after{
+    transition: ease-out;
 }
 
 .city-card img{
