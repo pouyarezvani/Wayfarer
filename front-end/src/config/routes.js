@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 // internal components
 import CitiesContainer from '../containers/CitiesContainer/CitiesContainer';
 import ProfileContainer from '../containers/ProfileContainer/ProfileContainer';
