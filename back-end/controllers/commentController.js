@@ -5,7 +5,21 @@ function getTime() {
 };
 
 module.exports = {
-    showComment: (req, res) => {
+    index: (req, res)=> {
+        db.Post.findById(req.params.post_id, (err, foundPost)=> {
+            if (err) return res.status(400).json({
+                status: 400,
+                message: 'Something went wrong, Please try again'
+            });
+            const allComments = foundPost.comments;
+            res.status(200).json({
+                status: 200,
+                data: allComments,
+                requestedAt: getTime()
+            })
+        });
+    },
+    show: (req, res) => {
         db.Post.findById(req.params.post_id, (err, foundPost) => {
             if (err) return res.status(400).json({
                 status: 400,
@@ -19,7 +33,7 @@ module.exports = {
             });
         });
     }, 
-    createComment: (req, res) => {
+    create: (req, res) => {
         db.Post.findById(req.params.post_id, (err, foundPost) => {
             if (err) return res.status(400).json({
                 status: 400,
@@ -45,7 +59,7 @@ module.exports = {
             });
         });
     },
-    deleteComment: (req, res) => {
+    delete: (req, res) => {
         db.Post.findById(req.params.post_id, (err, foundPost) => {
             if (err) return res.status(400).json({
                 status: 400,
@@ -65,7 +79,7 @@ module.exports = {
             });
         });
     },
-    updateComment: (req, res) => {
+    update: (req, res) => {
         db.Post.findById(req.params.post_id, (err, foundPost)=> {
             if (err) return res.status(400).json({
                 status: 400,

@@ -3,5 +3,5 @@ module.exports = {
     user: require('./userController'), 
     city: require('./cityController'),
     post: require('./postController'),
-    comment: require('./commentController')
+    comments: require('./commentController')
 };

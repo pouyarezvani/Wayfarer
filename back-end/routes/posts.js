@@ -10,8 +10,5 @@ router.get('./:post_id', ctrl.post.show);
 router.get('/', ctrl.post.index);
 router.put('./:post_id', authRequired, ctrl.post.edit);
 router.post('/', authRequired, ctrl.post.create);
-router.
-
-
 
 module.exports = router;
