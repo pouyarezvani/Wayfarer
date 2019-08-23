@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import './Login.css'
-// import { API_URL } from '../../constants';
+import { API_URL } from '../../constants';
 
 class Login extends Component {
     state = {
@@ -11,6 +11,11 @@ class Login extends Component {
         password: '',
         error: null,
     };
+
+    componentDidMount() {
+        axios.get(`${API_URL}/users`)
+            .then(res => console.log(res))
+    }
 
     handleChange = (event) => {
         this.setState({
