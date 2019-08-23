@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import PostDetail from '../../components/CityPosts/Posts/PostDetail/PostDetail';
+import Post from '../../components/CityPosts/Posts/Post/Post';
 
 
 class PostContainer extends Component {
+    
+
+
 
     render() {
         return (
-            <PostDetail />
+            <Post />
         );
     };
 };
