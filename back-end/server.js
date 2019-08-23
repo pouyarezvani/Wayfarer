@@ -4,8 +4,8 @@ const session = require('express-session');
 const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001;
+require('dotenv').config();
 const routes = require('./routes');
-// require('dotenv').config();
 
 // --------------------- MIDDLEWARE --------------------- //
 
@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
 // API Routes
 app.use('/api/v1/auth', routes.auth);
 app.use('/api/v1/users', routes.users);
-app.use('/api/v1/posts', routes.posts);
+//app.use('/api/v1/posts', routes.posts);
 app.use('/api/v1/cities', routes.cities);
 
 
