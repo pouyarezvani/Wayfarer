@@ -1,5 +1,9 @@
 const db = require('../models');
 
+function getTime() {
+  return new Date().toLocaleString();
+};
+
 const index = (req, res) => {
   db.City.find({}, (err, cities) => {
     if(err) return res.status(500).json({
@@ -12,27 +16,29 @@ const index = (req, res) => {
 };
 
 const show = (req, res) => {
-  db.City.findById(req.params.city_id, (err, city) => {
+  db.City.findById(req.params.city_id, (err, foundCity) => {
     if(err) return res.status(500).json({
       status: 500,
-      message: "Something went wrong, please try again",
-      error: err });
+      message: "Something went wrong, please try again"
+    });
      
-    return res.json({ status:200, city });
+    return res.json({ status:200, message: foundCity });
   });
 };
 
 const create = (req, res) => {
-  db.City.create(req.body.city, (err, city) => {
-    if(err) return res.status(500).json({
-      status: 500,
-      message: "Something went wrong, please try again",
-      error: err });
+  const newCity = req.body;
+  db.City.create(newCity, (err, createdCity) => {
+    if (err) return res.status(400).json({
+      status: 400,
+      message: "Something went wrong, please try again"
+    });
     
     return res.status(201).json({
       status: 201,
-      message: 'new city created',
-      city });
+      message: createdCity,
+      requestedAt: getTime(),
+    });
   });
 };
 
@@ -51,22 +57,15 @@ const remove = (req, res) => {
 };
 
 const update = (req, res) => {
-  db.City.findById(req.params.city_id, async (err, city) => {
-    if(err) return res.status(500).json({
-      status: 500,
-      message: "something went wrong, please try again",
-      error: err });
-    
-    Object.keys(req.body.city).forEach(key => {
-      city[key] = req.body.city[key];
+  db.City.findByIdAndUpdate(req.params.city_id, req.body, { new: true }, (err, updatedCity) => {
+    if(err) return res.status(400).json({
+      status: 400,
+      message: "something went wrong, please try again"
     });
-
-    await city.save();
-
-    return res.json({
-      status: 200,
-      message: "",
-      city
+    res.status(202).json({
+      status: 202,
+      data: updatedCity,
+      requestedAt: getTime()
     });
   });
 };
@@ -78,4 +77,3 @@ module.exports = {
   remove,
   update
 };
-
