@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import { API_URL } from '../../constants';
+import { Link } from 'react-router-dom';
+import { API_URL } from '../../../constants';
+
+// import styles
+import './Register.css';
 
 
 class Register extends Component {
@@ -17,15 +21,15 @@ class Register extends Component {
         });
     };
 
-    // handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     const newUser = this.state;
-    //     axios.post(`${API_URL}/auth/register`, newUser)
-    //         .then(res => this.props.history.push('/login'))
-    //         .catch(err => {
-    //             this.setState({ errors: err.response.data.errors });
-    //         })
-    // };
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const newUser = this.state;
+        axios.post(`${API_URL}/auth/register`, newUser)
+            .then(res => this.props.history.push('/login'))
+            .catch(err => {
+                this.setState({ errors: err.response.data.errors });
+            })
+    };
 
     render() {
         return (
@@ -40,14 +44,15 @@ class Register extends Component {
                 ))}
                 <section id="register">
                     <h2>Register</h2>
+                    <Link to="/"><button>X</button></Link>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="username">Username</label>
-                            <input type="username" id="username" name="username" value={this.state.username} onChange={this.handleChange} className="auth-input" placeholder="Username"/>
+                            <input type="username" id="username" name="username" value={this.state.username} onChange={this.handleChange} className="auth-input" placeholder="Username" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
-                            <input type="email" id="email" name="email" value={this.state.email} onChange={this.handleChange} className="auth-input" placeholder="Email"/>
+                            <input type="email" id="email" name="email" value={this.state.email} onChange={this.handleChange} className="auth-input" placeholder="Email" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="password">Password</label>

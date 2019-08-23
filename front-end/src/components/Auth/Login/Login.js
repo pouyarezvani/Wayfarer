@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import './Login.css'
-import { API_URL } from '../../constants';
+import { API_URL } from '../../../constants';
 
 class Login extends Component {
     state = {
@@ -13,8 +13,9 @@ class Login extends Component {
     };
 
     componentDidMount() {
-        axios.get(`${API_URL}/users`)
+        axios.get(`${API_URL}/users/`)
             .then(res => console.log(res))
+            .catch(error => console.log(error))
     }
 
     handleChange = (event) => {
@@ -39,7 +40,7 @@ class Login extends Component {
                     <h1>Login</h1>
                     <Link to="/"><button>X</button></Link>
 
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit} method="POST" action={`${API_URL}/users`}>
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
                             <input value={this.state.email} onChange={this.handleChange} className="auth-input" type="email" id="email" name="email" placeholder="example@example.com" />

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 // internal components
 import Login from '../../components/Auth/Login/Login';
+import Register from '../../components/Auth/Register/Register';
 import './Home.css';
+
 class Home extends Component {
     state = {
         index: 0,
@@ -48,7 +50,6 @@ class Home extends Component {
 
     }
     render() {
-        console.log('rerender?');
         return (
             <div className="home-body">
                 <section className="home-carousel">
@@ -62,6 +63,7 @@ class Home extends Component {
                     ? <Login />
                     : null
                 }
+                {this.props.register && <Register />}
                 <div className="main">
                     <h3>Wayferer is..</h3>
                     <section className="home-content">
