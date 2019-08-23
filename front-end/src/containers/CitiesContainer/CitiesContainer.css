@@ -7,7 +7,6 @@
     grid-column-start: 1;
     grid-column-end: 2;
     height: 100vh;
-    border: 1px solid black; 
 }
 
 .city-posts{
