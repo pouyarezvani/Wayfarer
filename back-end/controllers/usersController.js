@@ -28,13 +28,13 @@ module.exports = {
     },
 
     delete: (req, res) => {
-        db.User.findOneAndDelete(
-            { name: req.params.user_id },
+        db.User.findByIdAndDelete(
+            req.params.user_id,
             ( error, deletedUser ) => {
                 if (error) return res.status(500).json({ status: 500, message: 'Something went wrong. Please try again.'});
                 res.status(200).json({ 
                     status: 200, 
-                    data: `Success - deleted ${req.params.user_id}`,
+                    data: `Success - deleted ${deletedUser}`,
                     requestedAt: getTime(),
                 });
             },
