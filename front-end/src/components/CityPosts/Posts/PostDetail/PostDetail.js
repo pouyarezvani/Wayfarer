@@ -1,9 +1,10 @@
 import React from 'react';
 
-const PostDetail = () => {
+const PostDetail = (props) => {
+
     return (
         <section>
-            <h1>Hi</h1>
+            hi
         </section>
     );
 };
