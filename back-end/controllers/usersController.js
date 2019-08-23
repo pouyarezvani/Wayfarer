@@ -21,6 +21,7 @@ module.exports = {
             if (err) return res.status(500).json({ status: 500, message: 'Something went wrong. Please try again.' });
             res.status(200).json({ 
                 status: 200, 
+                numberOfResults: allUsers.length,
                 data: allUsers,
                 requestAt: getTime(),
             });

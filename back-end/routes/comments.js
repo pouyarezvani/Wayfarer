@@ -8,8 +8,8 @@ const authRequired = require('../middleware/authRequired');
 //Comments Route
 router.get('/:post_id/:comment_id', ctrl.comments.show);
 router.get('/:post_id', ctrl.comments.index);
-router.put('/:post_id/:comment_id', ctrl.comments.update);
 router.post('/:post_id', ctrl.comments.create);
+router.put('/:post_id/:comment_id', ctrl.comments.update);
 router.delete('/:post_id/:comment_id', ctrl.comments.delete);
 
 module.exports = router;

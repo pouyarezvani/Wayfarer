@@ -14,6 +14,7 @@ module.exports = {
             const allComments = foundPost.comments;
             res.status(200).json({
                 status: 200,
+                numberOfResults: allComments.length,
                 data: allComments,
                 requestedAt: getTime()
             })
@@ -79,26 +80,42 @@ module.exports = {
             });
         });
     },
-    update: (req, res) => {
-        db.Post.findById(req.params.post_id, (err, foundPost)=> {
+    edit: (req, res) => {
+        db.Post.findByIdAndUpdate(req.params.post_id, req.body, { new: true }, (err, updatedPost) => {
             if (err) return res.status(400).json({
+                status: 400, 
+                message: 'Something went wrong, please try again'
+            });
+            res.status(202).json({
+                status: 202,
+                data: updatedPost,
+                requestedAt: getTime()
+            });
+        });
+    },
+
+    update: (req, res) => {
+        db.Comment.findByIdAndUpdate(req.params.comment_id, req.body, { new: true } ,(error, updatedComment) => {
+            if(error) return res.status(400).json({
                 status: 400,
                 message: 'Something went wrong, please try again'
             });
-            const commentToUpdate = foundPost.comments.id(req.params.comment_id);
-            commentToUpdate.title = req.body.title;
-            commentToUpdate.content = req.body.content;
-            foundPost.save((err, savedPost) => {
-                if (err) return res.status(400).json({
+            db.Post.findById(req.params.post_id, (error, foundPost) => {
+                if(error) return res.status(400).json({
                     status: 400,
                     message: 'Something went wrong, please try again'
                 });
-                res.status(200).json({
-                    status: 200,
-                    data: savedPost,
-                    requestedAt: getTime()
-                });
+
+                foundPost.comments.id(req.params.comment_id).remove();
+                foundPost.comments.push(updatedComment);
+                foundPost.save((err, savedPost) => {
+                    if(error) return res.status(400).json({
+                        status: 400,
+                        message: 'Something went wrong, please try again'
+                    });
+                    res.status(200).json({ status: 200, data: updatedComment })
+                })
             });
         });
-    }
+    },
 };
