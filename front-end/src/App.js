@@ -6,12 +6,12 @@ import Routes from './config/routes'
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <NavBar />
-      <Routes />
-    </div>
-  );
+    return (
+        <div className="App">
+            <NavBar />
+            <Routes />
+        </div>
+    );
 }
 
 export default App;
