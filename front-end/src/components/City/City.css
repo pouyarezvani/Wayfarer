@@ -1,0 +1,12 @@
+.city-card{
+    display: flex;
+    justify-content: space-between;
+    width: 30vw;
+    border: 1px solid black;
+    margin-bottom: 1em ;
+}
+
+.city-card img{
+    height:10vh;
+    width: 10vw;
+}
