@@ -11,7 +11,7 @@ const routes = require('./routes');
 
 
 // BodyParser
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Custom Logger Middleware
@@ -47,8 +47,9 @@ app.get('/', (req, res) => {
 // API Routes
 app.use('/api/v1/auth', routes.auth);
 app.use('/api/v1/users', routes.users);
-//app.use('/api/v1/posts', routes.posts);
+app.use('/api/v1/posts', routes.posts);
 app.use('/api/v1/cities', routes.cities);
+app.use('/api/v1/comments', routes.comments);
 
 
 // --------------------- START SERVER --------------------- //
