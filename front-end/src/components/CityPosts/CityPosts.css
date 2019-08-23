@@ -32,9 +32,14 @@
 .post-box {
     display: grid;
     grid-template-columns: 1fr 5fr;
-    border: 1px solid black;
+    border: 1px solid rgb(241, 241, 241);
     border-radius: 5px;
     margin: 1em 2em;
+}
+
+.post-box:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: .8s;
 }
 
 .post-box-image {
