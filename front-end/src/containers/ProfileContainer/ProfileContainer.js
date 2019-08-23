@@ -17,9 +17,9 @@ class ProfileContainer extends Component {
         return (
             <div className="post-container">
                 <div className="post">
-                    {this.props.currentUser.admin || this.state.currentUser.id === this.post.user.id
+                    {/* {this.props.currentUser.admin || this.state.currentUser.id === this.post.user.id
                         ? <button>x</button>
-                        : null}
+                        : null} */}
                     <img src={this.state.post.imageUrl} />
                     <h1>{this.state.post.name}</h1>
                     <p>{this.state.post.content}</p>
