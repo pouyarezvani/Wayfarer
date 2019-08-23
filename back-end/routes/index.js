@@ -1,7 +1,7 @@
 module.exports = { 
-    auth: require('./auth'),
-    users: require('./users'), 
-    cities: require('./cities'),
-    posts: require('./posts'),
-    comments: require('./comments')
+    auth: require('./auth.js'),
+    users: require('./users.js'), 
+    cities: require('./cities.js'),
+    posts: require('./posts.js'),
+    comments: require('./comments.js'),
 };

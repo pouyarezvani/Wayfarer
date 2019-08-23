@@ -11,7 +11,7 @@ const routes = require('./routes');
 
 
 // BodyParser
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Custom Logger Middleware

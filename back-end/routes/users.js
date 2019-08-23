@@ -6,10 +6,9 @@ const authRequired = require('../middleware/authRequired');
 // Endpoint => 'api/v1/users'
 
 // USER controllers
-router.get('/:user_id', authRequired, ctrl.user.show),
-router.get('/', authRequired, ctrl.user.index);
-router.put('/:user_id', authRequired, ctrl.user.edit);
-router.delete('/:user_id', authRequired, ctrl.user.delete);
-router.post('/', authRequired, ctrl.user.create),
+router.get('/:user_id', ctrl.users.show);
+router.get('/', ctrl.users.index);
+router.put('/:user_id', ctrl.users.edit);
+router.delete('/:user_id', ctrl.users.delete);
 
 module.exports = router;

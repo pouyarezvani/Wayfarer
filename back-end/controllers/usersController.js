@@ -34,7 +34,7 @@ module.exports = {
                 if (error) return res.status(500).json({ status: 500, message: 'Something went wrong. Please try again.'});
                 res.status(200).json({ 
                     status: 200, 
-                    data: deletedUser,
+                    data: `Success - deleted ${req.params.user_id}`,
                     requestedAt: getTime(),
                 });
             },
@@ -49,20 +49,6 @@ module.exports = {
                 status: 202,
                 data: editedUser,
                 requestedAt: getTime(),
-            });
-        });
-    },
-
-    create: (req, res) => {
-        db.User.create(newUser, (err, createdUser) => {
-            if (err) return res.status(400).json({
-                status: 400,
-                message: 'Something went wrong, please try again!'
-            });
-            res.status(201).json({
-                status: 201,
-                data: createdUser,
-                requestedAt: getTime()
             });
         });
     }
