@@ -7,8 +7,8 @@ const authRequired = require('../middleware/authRequired');
 //City Routes
 router.get('/:city_id', ctrl.city.show);
 router.get('/', ctrl.city.index);
-router.put('/:city_id', authRequired, ctrl.city.update);
-router.delete('/:city_id', authRequired, ctrl.city.remove);
-router.post('/', authRequired, ctrl.city.create);
+router.put('/:city_id', ctrl.city.update);
+router.delete('/:city_id', ctrl.city.remove);
+router.post('/', ctrl.city.create);
 
 module.exports = router;
