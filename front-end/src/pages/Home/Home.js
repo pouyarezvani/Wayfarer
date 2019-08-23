@@ -32,7 +32,6 @@ class Home extends Component {
         if (this.state.index !== this.images.length - 1) {
             clearInterval()
             this.setState((prevstate) => { index: prevstate.index++ }, () => {
-                console.log(this.state.index)
                 this.forceUpdate()
             })
         } else {
@@ -43,7 +42,6 @@ class Home extends Component {
     decrementCarousel = () => {
         if (this.state.index !== -1) {
             this.setState({ index: this.state.index-- })
-            console.log('click', this.state.index)
         } else {
             this.state.index = this.images.length - 1;
         }
