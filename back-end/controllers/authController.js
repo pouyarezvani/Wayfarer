@@ -78,7 +78,7 @@ function login(req, res) {
 };
 
 const logout = (req, res) => {
-    req.sesssion.destroy(err => {
+    req.session.destroy(err => {
         if (err) return res.status(500).json({ status: 500, message: 'Something went wrong. Please try again.' });
         res.sendStatus(200);
     });
