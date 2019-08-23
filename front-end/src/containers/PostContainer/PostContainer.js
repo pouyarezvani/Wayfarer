@@ -1,17 +1,4 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-import Post from '../../components/CityPosts/Posts/Post/Post';
-
-
-class PostContainer extends Component {
-    
-
-
-
-    render() {
-        return (
-            <Post />
-=======
 // styles
 import './PostContainer.css';
 
@@ -47,7 +34,6 @@ class PostContainer extends Component {
                 </div>
 
             </div>
->>>>>>> 2c772f9e4956e71175ada067c4494527fbbe5630
         );
     };
 };
