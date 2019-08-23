@@ -26,11 +26,10 @@ class PostContainer extends Component {
         return (
             <div className="post-container">
                 <div className="post">
-                    <img src={this.state.post.imageUrl} />
+                    <img src={this.state.post.imageUrl} alt={`${this.state.post.name}`} />
                     <h1>{this.state.post.name}</h1>
                     <p>{this.state.post.content}</p>
                     <p>Posted By: Eduardo</p>
-                    <p>Posted On: {this.state.post.date} </p>
                 </div>
 
             </div>
