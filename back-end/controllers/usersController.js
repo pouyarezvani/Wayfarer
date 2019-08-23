@@ -42,7 +42,8 @@ module.exports = {
     },
 
     edit: (req, res) => {
-        db.User.findByIdAndUpdate(req.params.user_id, req.body, { new: true }, { password: 0, _v: 0 }, (err, editedUser) => {
+        db.User.findByIdAndUpdate(req.params.user_id, req.body, { new: true }, (err, editedUser) => {
+            console.log(req.body);
             if (err) return res.status(400).json({ status: 400, message: 'Something went wrong. Please try again.' 
             }),
             res.status(202).json({
@@ -55,7 +56,7 @@ module.exports = {
     create: (req, res) => {
         const newUser = req.body;
 
-        db.Post.create(newUser, (err, createdUser) => {
+        db.User.create(newUser, (err, createdUser) => {
             if (err) return res.status(400).json({
                 status: 400,
                 message: 'Something went wrong, please try again'
