@@ -23,18 +23,20 @@ class Home extends Component {
             if (i >= this.images.length) {
                 i = 0
             }
-        }, 5000)
+        }, 3000)
     }
     render() {
         console.log(this.state.index)
         return (
             <div className="home-body">
                 <section className="home-carousel">
-                    <img className="carousel-image" src={this.images[this.state.index]} alt="picture of city" />
-                    <div className="carousel-buttons">
-                        <button>Left</button>
-                        <button>Right</button>
+                    <div className="carousel-image-container">
+                        <img className="carousel-image" src={this.images[this.state.index]} alt="picture of city" />
+                        <button>Prev</button>
+                        <button>Next</button>
                     </div>
+
+
                 </section>
                 <div className="main">
                     <h3>Wayferer is..</h3>

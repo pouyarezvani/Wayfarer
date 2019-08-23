@@ -3,19 +3,13 @@
     position: relative;
 }
 
+.carousel-image-container{
+    width: 100%;
+    height: 70vh;
+}
 .carousel-image{
     width: 100%;
     height: 70vh;
-    position: fixed;
-    z-index: -1;
-    top:0;
-}
-
-.carousel-buttons{
-    position: fixed;
-    bottom:0;
-    display: flex;
-    justify-content: center;
 }
 
 .main{
