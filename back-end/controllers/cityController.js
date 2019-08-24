@@ -22,7 +22,7 @@ const show = (req, res) => {
       message: "Something went wrong, please try again"
     });
      
-    return res.json({ status:200, message: foundCity });
+    return res.json({ status: 200, message: foundCity });
   });
 };
 

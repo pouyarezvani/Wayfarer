@@ -5,7 +5,8 @@ const CitySchema = new Schema({
     name: {
         type: String,
         required: true,
-        maxlength: 30
+        maxlength: 30,
+        unique: true
     },
     image: {
         type: String,
