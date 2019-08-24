@@ -12,6 +12,12 @@ const NavBar = () => {
                 <NavLink className="nav-li" to="/profile">Profile</NavLink>
             </li>
             <li>
+                <NavLink className="nav-li" to="/login">Log In</NavLink>
+            </li>
+            <li>
+                <NavLink className="nav-li" to="/register">Register</NavLink>
+            </li>
+            <li>
                 <NavLink className="nav-li" to="/logout">Log Out</NavLink>
             </li>
         </div>
