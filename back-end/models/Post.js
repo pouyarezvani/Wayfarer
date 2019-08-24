@@ -17,19 +17,13 @@ const PostSchema = new Schema({
     ],
     content: {
         type: String,
-        required: true, 
+        required: true,
         maxlength: 1000
     },
-    city: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'City'
-        }
-    ],
     date_posted: {
         type: Date,
         default: Date.now
-    }, 
+    },
     comments: [Comment.schema]
 });
 

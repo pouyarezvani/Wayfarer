@@ -10,14 +10,21 @@ const CitySchema = new Schema({
     image: {
         type: String,
         required: true
-    }, 
+    },
     description: {
         type: String,
         required: true
     },
+    posts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Post'
+        }
+    ],
     slug: {
         type: String
-    }
+    },
+
 });
 
 const City = mongoose.model('City', CitySchema);

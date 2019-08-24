@@ -13,10 +13,21 @@ class Home extends Component {
         this.setBackgroundImage()
     }
 
-    images = [
-        'https://images.unsplash.com/photo-1470219556762-1771e7f9427d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80',
-        'https://images.unsplash.com/photo-1493540554008-8e3008329feb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-        'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80'
+    images = [{
+        url: 'https://images.unsplash.com/photo-1470219556762-1771e7f9427d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80',
+        alt: 'New York City'
+    },
+    {
+        url: 'https://images.unsplash.com/photo-1493540554008-8e3008329feb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+        alt: 'Chicago'
+    },
+    {
+        url: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+        alt: 'Los Angeles'
+    }
+
+
+
     ]
     setBackgroundImage = () => {
         let i = this.state.index;
@@ -54,7 +65,7 @@ class Home extends Component {
             <div className="home-body">
                 <section className="home-carousel">
                     <div className="carousel-image-container">
-                        <img className="carousel-image" src={this.images[this.state.index]} alt="picture of city" />
+                        <img className="carousel-image" src={this.images[this.state.index].url} alt={this.images[this.state.index].alt} />
                         <button onClick={this.decrementCarousel} >Prev</button>
                         <button onClick={() => this.incrementCarousel()} >Next</button>
                     </div>
