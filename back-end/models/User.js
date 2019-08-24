@@ -37,7 +37,7 @@ const UserSchema = new Schema({
     current_city: {
         type: String
     },
-    post: [
+    posts: [
         {
             type: Schema.Types.ObjectId,
             ref: 'Post'

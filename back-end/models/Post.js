@@ -3,6 +3,14 @@ const Schema = mongoose.Schema;
 const Comment = require('./Comment');
 
 const PostSchema = new Schema({
+    username: {
+        type: String,
+        required: true
+    },
+    city_slug: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true,

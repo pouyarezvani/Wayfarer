@@ -34,7 +34,6 @@ module.exports = {
     },
     create: (req, res) => {
         const newPost = req.body;
-
         db.Post.create(newPost, (err, createdPost) => {
             if (err) return res.status(400).json({
                 status: 400,
@@ -45,12 +44,38 @@ module.exports = {
                 data: createdPost,
                 requestedAt: getTime()
             });
+
+            //finds the user this post belongs to then adds it to 
+            // that models posts array and populates
+            db.User.findOneAndUpdate({ username: newPost.username }, { new: true }, (error, foundUser) => {
+                if (error) return console.log(error);
+                foundUser.posts.push(createdPost);
+                foundUser.save()
+            })
+                .populate('posts')
+                .exec((error, user) => {
+                    if (error) return console.log(error);
+                    console.log(user)
+                });
+
+            //finds the city this post belongs to then adds it to 
+            // that models posts array and populates
+            db.City.findOneAndUpdate({ slug: newPost.city_slug }, { new: true }, (error, foundCity) => {
+                if (error) return console.log(error);
+                foundCity.posts.push(createdPost);
+                foundCity.save()
+            })
+                .populate('posts')
+                .exec((error, city) => {
+                    if (error) return console.log(error);
+                    console.log(city);
+                })
         });
     },
     edit: (req, res) => {
         db.Post.findByIdAndUpdate(req.params.post_id, req.body, { new: true }, (err, updatedPost) => {
             if (err) return res.status(400).json({
-                status: 400, 
+                status: 400,
                 message: 'Something went wrong, please try again'
             });
             res.status(202).json({

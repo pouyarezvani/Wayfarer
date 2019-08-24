@@ -43,7 +43,10 @@ class CitiesContainer extends Component {
 
     getCities = () => {
         axios.get(`${API_URL}/cities`)
-            .then(response => this.setState({ cities: response.data.cities }))
+            .then(response => {
+                console.log(response)
+                this.setState({ cities: response.data.cities })
+            })
             .catch(error => console.log(error));
     }
 
