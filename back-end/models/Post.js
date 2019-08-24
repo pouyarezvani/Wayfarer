@@ -5,16 +5,10 @@ const Comment = require('./Comment');
 const PostSchema = new Schema({
     title: {
         type: String,
-        requried: true,
+        required: true,
         maxlength: 200,
         minlength: 1
     },
-    user: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        }
-    ],
     content: {
         type: String,
         required: true,
