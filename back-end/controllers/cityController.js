@@ -23,6 +23,7 @@ const show = (req, res) => {
 };
 
 const create = (req, res) => {
+    console.log(req.body);
   db.City.create(req.body.city, (err, city) => {
     if(err) return res.status(500).json({
       status: 500,
