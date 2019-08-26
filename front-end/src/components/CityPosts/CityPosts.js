@@ -6,7 +6,7 @@ import Posts from './Posts/Posts';
 // Styles
 import './CityPosts.css';
 
-const CityPosts = ({ slug, posts, users, name, image, postImage }) => {
+const CityPosts = ({ slug, posts, users, name, image, postImage, handleDelete, handleEdit }) => {
     return (
         <>
             <CityHeader name={name} image={image} />
@@ -14,7 +14,13 @@ const CityPosts = ({ slug, posts, users, name, image, postImage }) => {
                 <h2>Posts</h2>
                 <Link to={`/city/add_post/${slug}`} className="post-btn">+</Link>
             </div>
-            {posts && <Posts posts={posts} users={users} image={postImage} />}
+            {posts && <Posts
+                posts={posts}
+                users={users}
+                image={postImage}
+                handleDelete={handleDelete}
+                handleEdit={handleEdit}
+            />}
             {/* {posts ? <Posts posts={posts} users={users} /> : 'Sorry, no posts have been created yet...'} */}
 
         </>

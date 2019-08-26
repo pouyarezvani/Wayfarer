@@ -58,6 +58,17 @@ class CitiesContainer extends Component {
         });
     };
 
+    handleEdit = event => {
+        event.preventDefault()
+        console.log('click');
+        // editPost();
+    }
+    handleDelete = event => {
+        event.preventDefault()
+        console.log('click');
+        this.deletePost();
+    }
+
 
     // API Calls via Axios
     getCurrentUserData = () => {
@@ -101,10 +112,23 @@ class CitiesContainer extends Component {
             });
     }
 
+    deletePost = event => {
+        event.preventDefault();
+        axios.delete(`${API_URL}/posts/${this.props.deletePost}`)
+            .then(response => console.log(response))
+            .catch(error => console.log(error.response));
+
+    }
 
     render() {
+        console.log(this.props);
         return (
             <div className="cities-container">
+                {this.props.deletePost
+                    && <div>
+                        <Link to='/cities'> <button>Cancel</button> </Link>
+                        <button onClick={this.deletePost}>Delete</button>
+                    </div>}
                 <div className="aside">
                     <Aside cities={this.state.cities} />
                 </div>
@@ -117,6 +141,8 @@ class CitiesContainer extends Component {
                             posts={this.state.cityAsProp.posts}
                             slug={this.state.cityAsProp.slug}
                             postImage={this.state.user.image_url}
+                            handleDelete={this.handleDelete}
+                            handleEdit={this.handleEdit}
                         />
                         : <CityPosts
                             name={this.state.defaultCity.name}
@@ -136,7 +162,6 @@ class CitiesContainer extends Component {
                         </form>
                     </div>
                 }
-
             </div>
         );
     };
