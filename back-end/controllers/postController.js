@@ -55,7 +55,7 @@ module.exports = {
                 .populate('posts')
                 .exec((error, user) => {
                     if (error) return console.log(error);
-                    console.log(user)
+                    console.log(user);
                 });
 
             //finds the city this post belongs to then adds it to 

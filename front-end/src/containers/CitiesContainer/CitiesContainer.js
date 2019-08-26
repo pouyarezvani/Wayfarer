@@ -45,7 +45,7 @@ class CitiesContainer extends Component {
         axios.get(`${API_URL}/cities`)
             .then(response => {
                 console.log(response)
-                this.setState({ cities: response.data.cities })
+                this.setState({ cities: response.data })
             })
             .catch(error => console.log(error));
     }
@@ -58,6 +58,7 @@ class CitiesContainer extends Component {
                     <Aside cities={this.state.cities} />
                 </div>
                 <div className="city-posts">
+
                     {this.props.cityName
                         ? <CityPosts
                             name={this.state.cityAsProp.name}
