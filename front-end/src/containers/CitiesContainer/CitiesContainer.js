@@ -13,11 +13,12 @@ class CitiesContainer extends Component {
         cities: [],
         defaultCity: {
             id: 1,
-            name: 'San Francisco',
+            name: 'Chicago',
             image: 'https://images.unsplash.com/photo-1470219556762-1771e7f9427d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80'
         },
         posts: [],
         cityAsProp: {},
+        displayPosts: false,
     };
 
     componentDidMount() {
@@ -25,6 +26,7 @@ class CitiesContainer extends Component {
             return this.sendCityProp();
         };
         this.getCities();
+        this.setState({ displayPosts: true });
     };
 
     componentDidUpdate(prevProps, prevState) {
@@ -44,14 +46,12 @@ class CitiesContainer extends Component {
     getCities = () => {
         axios.get(`${API_URL}/cities`)
             .then(response => {
-                console.log(response)
                 this.setState({ cities: response.data })
             })
             .catch(error => console.log(error));
     }
 
     render() {
-        console.log(this.state.cities)
         return (
             <div className="cities-container">
                 <div className="aside">
@@ -63,7 +63,7 @@ class CitiesContainer extends Component {
                         ? <CityPosts
                             name={this.state.cityAsProp.name}
                             image={this.state.cityAsProp.image}
-                            posts={this.state.posts}
+                            posts={this.state.cityAsProp.posts}
                             cities={this.state.cities}
                             users={this.state.users}
                         />
