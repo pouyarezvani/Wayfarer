@@ -11,8 +11,8 @@ const routes = require('./routes');
 
 
 // BodyParser
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Custom Logger Middleware
 app.use((req, res, next) => {
