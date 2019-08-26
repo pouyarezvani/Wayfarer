@@ -2,13 +2,15 @@ const express = require('express');
 const router = express.Router();
 const ctrl = require('../controllers');
 const authRequired = require('../middleware/authRequired');
+const adminRequired = require('../middleware/adminRequired.js');
+
 // Endpoint : 'api/v1/cities'
 
 //City Routes
-router.get('/:city_id', ctrl.city.show);
+router.get('/:city_id', authRequired, ctrl.city.show);
 router.get('/', ctrl.city.index);
 router.put('/:city_id', ctrl.city.update);
 router.delete('/:city_id', ctrl.city.remove);
-router.post('/', ctrl.city.create);
+router.post('/', adminRequired, ctrl.city.create);
 
 module.exports = router;
