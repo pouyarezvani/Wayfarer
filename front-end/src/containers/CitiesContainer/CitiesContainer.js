@@ -18,6 +18,7 @@ class CitiesContainer extends Component {
         },
         posts: [],
         cityAsProp: {},
+        displayPosts: false,
     };
 
     componentDidMount() {
@@ -25,6 +26,7 @@ class CitiesContainer extends Component {
             return this.sendCityProp();
         };
         this.getCities();
+        this.setState({ displayPosts: true });
     };
 
     componentDidUpdate(prevProps, prevState) {
@@ -44,14 +46,12 @@ class CitiesContainer extends Component {
     getCities = () => {
         axios.get(`${API_URL}/cities`)
             .then(response => {
-                console.log(response)
                 this.setState({ cities: response.data })
             })
             .catch(error => console.log(error));
     }
 
     render() {
-        console.log(this.state.cities)
         return (
             <div className="cities-container">
                 <div className="aside">
@@ -63,7 +63,7 @@ class CitiesContainer extends Component {
                         ? <CityPosts
                             name={this.state.cityAsProp.name}
                             image={this.state.cityAsProp.image}
-                            posts={this.state.posts}
+                            posts={this.state.cityAsProp.posts}
                             cities={this.state.cities}
                             users={this.state.users}
                         />

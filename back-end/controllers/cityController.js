@@ -6,7 +6,7 @@ function getTime() {
 
 const index = (req, res) => {
   db.City.find({})
-    .populate('Post')
+    .populate('posts')
     .exec((error, cities) => res.json(cities));
 };
 

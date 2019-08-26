@@ -13,7 +13,9 @@ const CityPosts = ({ posts, users, name, image }) => {
                 <h2>Posts</h2>
                 <button className="post-btn"><span>+</span></button>
             </div>
-            <Posts posts={posts} users={users} />
+            {posts && <Posts posts={posts} users={users} />}
+            {/* {posts ? <Posts posts={posts} users={users} /> : 'Sorry, no posts have been created yet...'} */}
+
         </>
     );
 };
