@@ -10,7 +10,6 @@ const Posts = ({ posts, users }) => {
             <Link key={post._id} to={`/post/${post._id}`} >
                 <Post key={post._id} name={post.name} content={post.content} image={post.imageUrl} />
             </Link>
-
         )
     });
 
