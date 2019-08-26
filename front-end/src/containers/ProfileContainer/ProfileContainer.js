@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { API_URL } from '../../'
-
+import { API_URL } from '../../constants';
 import Profile from '../../components/Profile/Profile';
 import './ProfileContainer.css'
 
 class ProfileContainer extends Component {
     state = {
+        profile: {},
         post: {
             id: 1,
             name: 'San Francisco',
@@ -16,10 +16,18 @@ class ProfileContainer extends Component {
         },
     };
 
+    componentDidMount() {
+        const userId = localStorage.getItem('uid');
+        axios.get(`${API_URL}/user/${userId}`, { withCredentials: true })
+            console.log(res.data)
+            .then(res => this.setState({ profile: res.data }))
+            .catch(err => console.log(err))
+    }
+
     render() {
         return (
             <div className="post-container">
-                <Profile />
+                <Profile user={this.state.profile}/>
             </div>
         );
     };
