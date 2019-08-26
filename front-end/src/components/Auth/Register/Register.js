@@ -14,8 +14,10 @@ class Register extends Component {
         password: '',
         password2: '',
         errors: null,
+        text: ''
     };
     handleChange = (event) => {
+        console.log('change')
         this.setState({
             [event.target.name]: event.target.value,
         });
@@ -56,11 +58,11 @@ class Register extends Component {
                         </div>
                         <div className="form-group">
                             <label htmlFor="password">Password</label>
-                            <input type="password" id="password" name="password" value={this.state.email} onChange={this.handleChange} className="auth-input" />
+                            <input type="password" id="password" name="password" value={this.state.password} onChange={this.handleChange} className="auth-input" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="password2">Confirm Password</label>
-                            <input type="password2" id="password2" name="password2" value={this.state.email} onChange={this.handleChange} className="auth-input" />
+                            <input type="password" id="password2" name="password2" value={this.state.password2} onChange={this.handleChange} className="auth-input" />
                         </div>
                         <button type="submit" className="auth-btn">Register</button>
                     </form>
