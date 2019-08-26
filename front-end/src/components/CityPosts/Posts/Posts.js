@@ -7,10 +7,9 @@ const Posts = ({ posts, users }) => {
 
     const postLinks = posts.map(post => {
         return (
-            <Link key={post.id} to={`/post/${post.id}`} >
-                <Post key={post.id} name={post.name} content={post.content} image={post.imageUrl} />
+            <Link key={post._id} to={`/post/${post._id}`} >
+                <Post key={post._id} name={post.name} content={post.content} image={post.imageUrl} />
             </Link>
-
         )
     });
 
