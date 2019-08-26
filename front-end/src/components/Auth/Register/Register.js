@@ -32,22 +32,24 @@ class Register extends Component {
                 this.props.history.push('/login')
             })
             .catch(error => {
-                console.log(error);
-                // this.setState({ errors: error, shouldComponentDisplayErrors: true });
+                const errors = error.response.data.errors;
+                console.log(error.response.data.errors);
+                this.setState({ errors, shouldComponentDisplayErrors: true });
+                console.log(this.state.errors);
             })
     };
 
     render() {
         return (
             <div className="register-row">
-                {/* {this.state.shouldComponentDisplayErrors && this.state.errors.map((e, i) => (
+                {this.state.shouldComponentDisplayErrors && this.state.errors.map((e, i) => (
                     <div className="alert" role="alert" key={i}>
                         {e.message}
                         <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                ))} */}
+                ))}
                 <section id="register">
                     <h2>Register</h2>
                     <Link to="/"><button>X</button></Link>
