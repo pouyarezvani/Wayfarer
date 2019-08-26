@@ -4,48 +4,57 @@ const validate = require('../validation/register');
 const db = require('../models');
 
 function signup(req, res) {
-    const { errors, notValid } = validate(req.body);
-
-    if (notValid) {
-        return res.status(400).json({ status: 400, errors });
+    const errors = [];
+    if (!req.body.email) {
+        errors.push({ field: 'email', message: 'Please enter an email' });
+    }
+    if (!req.body.password) {
+        errors.push({ field: 'password', message: 'Please enter a password' });
+    }
+    if (!req.body.password2) {
+        errors.push({ field: 'password2', message: 'Please confirm your password' });
     }
 
-    db.User.findOne({ email: req.body.email }, (err, foundUser) => {
-        if (err) {
-            return res.status(500).json({ status: 500, message: 'Something went wrong. Please try again.' });
-        }
-        if (foundUser) {
-            return res.status(400).json({ status: 400, message: 'Email address has already been registered. Please try again.' });
-        }
-        bcrypt.genSalt(10, (err, salt) => {
+    if (req.body.password !== req.body.password) {
+        errors.push({ field: 'password', message: 'Passwords did not match' });
+    }
+    if (db.User.findOne({ email: req.body.email })) {
+        errors.push({ field: 'email', message: 'Email already exists' });
+    }
+    if (errors.length) {
+        return res.status(500).json({ status: 500, errors });
+    }
+
+
+    bcrypt.genSalt(10, (err, salt) => {
+        if (err) return res.status(500).json({
+            status: 500,
+            message: 'Something went wrong. Please try again.'
+        });
+
+        bcrypt.hash(req.body.password, salt, (err, hash) => {
             if (err) return res.status(500).json({
                 status: 500,
                 message: 'Something went wrong. Please try again.'
             });
 
-            bcrypt.hash(req.body.password, salt, (err, hash) => {
+            const newUser = {
+                username: req.body.username,
+                email: req.body.email,
+                password: hash
+            };
+
+            db.User.create(newUser, (err, savedUser) => {
                 if (err) return res.status(500).json({
                     status: 500,
-                    message: 'Something went wrong. Please try again.'
+                    message: err
                 });
-
-                const newUser = {
-                    username: req.body.username,
-                    email: req.body.email,
-                    password: hash
-                };
-
-                db.User.create(newUser, (err, savedUser) => {
-                    if (err) return res.status(500).json({
-                        status: 500,
-                        message: err
-                    });
-                    res.status(200).json({ status: 201, message: 'SUCCESS!' });
-                });
+                res.status(200).json({ status: 201, message: 'SUCCESS!' });
             });
+        });
 
-        })
-    });
+    })
+
 };
 
 function login(req, res) {

@@ -65,7 +65,7 @@ class Home extends Component {
                     ? <Login />
                     : null
                 }
-                {this.props.register && <Register />}
+                {this.props.register && <Register history={this.props.history} />}
                 <div className="main">
                     <h3>Wayferer is..</h3>
                     <section className="home-content">

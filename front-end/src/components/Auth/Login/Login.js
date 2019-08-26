@@ -12,12 +12,6 @@ class Login extends Component {
         error: null,
     };
 
-    componentDidMount() {
-        axios.get(`${API_URL}/users/`)
-            .then(res => console.log(res))
-            .catch(error => console.log(error))
-    }
-
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
@@ -29,7 +23,7 @@ class Login extends Component {
         const userInfo = this.state;
         axios.post(`${API_URL}/auth/login`, userInfo, { withCredentials: true })
             .then(res => this.props.setCurrentUser(res.data.id))
-            .catch(err => this.setState({ error: err.response.data.message }));
+            .catch(err => this.setState({ error: err }));
     };
 
     render() {

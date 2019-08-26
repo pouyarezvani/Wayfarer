@@ -13,8 +13,9 @@ class Register extends Component {
         email: '',
         password: '',
         password2: '',
-        errors: null,
-        text: ''
+        errors: [],
+        text: '',
+        shouldComponentDisplayErrors: false
     };
     handleChange = (event) => {
         this.setState({
@@ -31,21 +32,22 @@ class Register extends Component {
                 this.props.history.push('/login')
             })
             .catch(error => {
-                console.log(error)
+                console.log(error);
+                // this.setState({ errors: error, shouldComponentDisplayErrors: true });
             })
     };
 
     render() {
         return (
             <div className="register-row">
-                {this.state.errors && this.state.errors.map((e, i) => (
+                {/* {this.state.shouldComponentDisplayErrors && this.state.errors.map((e, i) => (
                     <div className="alert" role="alert" key={i}>
                         {e.message}
                         <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                ))}
+                ))} */}
                 <section id="register">
                     <h2>Register</h2>
                     <Link to="/"><button>X</button></Link>
