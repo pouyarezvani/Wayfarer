@@ -33,7 +33,43 @@ module.exports = {
         });
     },
     create: (req, res) => {
+        const errors = [];
         const newPost = req.body;
+
+        if (!req.body.username) {
+            errors.push({ field: 'username', message: 'please enter a valid username' })
+        };
+
+        if (!req.body.city_slug) {
+            errors.push({ field: 'City Slug', message: 'please enter a valid slug for your city' })
+        };
+
+        if (db.User.findOne({ username: req.body.username }, (error, foundUser) => {
+            if (error) return res.status(500).json({ status: 500, message: 'something went wrong' });
+            if (!foundUser) {
+                errors.push({ field: 'username', message: 'User does not exist' });
+            }
+        }));
+
+        if (db.City.findOne({ city_slug: req.body.city_slug }, (error, foundCity) => {
+            if (error) return res.status(500).json({ status: 500, message: 'something went wrong' });
+            if (!foundCity) {
+                errors.push({ field: 'username', message: 'City does not exist' });
+            }
+        }));
+
+        if (!req.body.title) {
+            errors.push({ field: 'Title', message: 'please enter a title' })
+        };
+
+        if (!req.body.content) {
+            errors.push({ field: 'Content', message: 'please write content' })
+        };
+
+        if (errors.length) {
+            res.status(500).json({ status: 500, errors });
+        };
+
         db.Post.create(newPost, (err, createdPost) => {
             if (err) return res.status(400).json({
                 status: 400,

@@ -10,7 +10,12 @@ import './CitiesContainer.css'
 
 class CitiesContainer extends Component {
     state = {
-        users: [],
+        user: {
+            admin: Boolean,
+            email: '',
+            image_url: '',
+            username: ''
+        },
         cities: [],
         defaultCity: {
             id: 1,
@@ -19,10 +24,9 @@ class CitiesContainer extends Component {
         },
         posts: [],
         cityAsProp: {},
-        newPost: {
-            title: '',
-            content: ''
-        }
+        title: '',
+        content: ''
+
     };
 
     componentDidMount() {
@@ -30,7 +34,7 @@ class CitiesContainer extends Component {
             return this.sendCityProp();
         };
         this.getCities();
-        this.setState({ displayPosts: true });
+        this.getCurrentUserData();
     };
 
     componentDidUpdate(prevProps, prevState) {
@@ -47,7 +51,32 @@ class CitiesContainer extends Component {
         });
     };
 
+
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value,
+        });
+    };
+
+
     // API Calls via Axios
+    getCurrentUserData = () => {
+        axios.get(`${API_URL}/users/${this.props.currentUser}`)
+            .then(response => {
+                console.log(response);
+                this.setState({
+                    user: {
+                        admin: response.data.data.admin,
+                        email: response.data.data.email,
+                        image_url: response.data.data.image_url,
+                        username: response.data.data.username
+                    }
+                })
+
+            })
+            .catch(error => console.log(error.response));
+    }
+
     getCities = () => {
         axios.get(`${API_URL}/cities`)
             .then(response => {
@@ -58,13 +87,18 @@ class CitiesContainer extends Component {
 
     submitPost = event => {
         event.preventDefault();
-        axios.post(`${API_URL}/posts`, {
-            username: '',
-            city_slug: this.cityAsProp.slug,
-            title: this.state.newPost.postTitle,
-            content: this.state.newPost.content
-        })
-            .then(res => console.log(res));
+        axios.post(`${API_URL}/posts/`, {
+            username: this.state.user.username,
+            city_slug: this.props.slug,
+            title: this.state.title,
+            content: this.state.content
+        }, { withCredentials: true })
+            .then(res => {
+                console.log(res);
+            })
+            .catch(error => {
+                console.log(error.response);
+            });
     }
 
 
@@ -82,22 +116,23 @@ class CitiesContainer extends Component {
                             image={this.state.cityAsProp.image}
                             posts={this.state.cityAsProp.posts}
                             slug={this.state.cityAsProp.slug}
-                            cities={this.state.cities}
-                            users={this.state.users}
+                            postImage={this.state.user.image_url}
                         />
                         : <CityPosts
                             name={this.state.defaultCity.name}
                             image={this.state.defaultCity.image}
                             posts={this.state.posts} />}
                 </div>
+
                 {this.props.addPost
                     && <div className="add-post">
                         <Link to='/cities'>x</Link>
                         <form>
-                            <label>Name</label>
-                            <input type="text" />
+                            <label>Title</label>
+                            <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
                             <label>Content</label>
-                            <input type="text" />
+                            <input type="text" name="content" value={this.state.content} onChange={this.handleChange} />
+                            <button onClick={this.submitPost}>Submit</button>
                         </form>
                     </div>
                 }
