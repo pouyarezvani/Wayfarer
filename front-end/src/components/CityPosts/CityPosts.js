@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // Internal comonents
 import CityHeader from './CityHeader/CityHeader';
 import Posts from './Posts/Posts';
@@ -11,7 +12,7 @@ const CityPosts = ({ posts, users, name, image }) => {
             <CityHeader name={name} image={image} />
             <div className="posts-header">
                 <h2>Posts</h2>
-                <button className="post-btn"><span>+</span></button>
+                <Link to={`/add_post`} className="post-btn">+</Link>
             </div>
             {posts && <Posts posts={posts} users={users} />}
             {/* {posts ? <Posts posts={posts} users={users} /> : 'Sorry, no posts have been created yet...'} */}
