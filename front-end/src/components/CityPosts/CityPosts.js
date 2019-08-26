@@ -12,7 +12,7 @@ const CityPosts = ({ posts, users, name, image }) => {
             <CityHeader name={name} image={image} />
             <div className="posts-header">
                 <h2>Posts</h2>
-                <Link className="post-btn">+</Link>
+                <Link to={`/add_post`} className="post-btn">+</Link>
             </div>
             {posts && <Posts posts={posts} users={users} />}
             {/* {posts ? <Posts posts={posts} users={users} /> : 'Sorry, no posts have been created yet...'} */}
