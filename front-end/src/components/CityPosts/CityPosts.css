@@ -15,7 +15,8 @@
 }
 .city-image img{
     height:30vh;
-    width: 40vw;
+    width: 100%;
+    top: 0;
 }
 
 .posts-header {

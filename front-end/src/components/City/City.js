@@ -6,7 +6,7 @@ const City = ({ cityName, image }) => {
     return (
         <div className="city-card">
             <div >
-                <p>Name:<strong>{cityName}</strong></p>
+                <p><strong>{cityName}</strong></p>
             </div>
             <img src={image} alt="city-container" />
         </div>
