@@ -10,8 +10,8 @@ const adminRequired = require('../middleware/adminRequired.js');
 // USER controllers
 router.get('/:user_id', ctrl.users.show);
 router.get('/', ctrl.users.index);
-router.put('/:user_id', authRequired, ctrl.users.edit);
-router.delete('/:user_id', adminRequired, ctrl.users.delete);
-router.post('/', authRequired, ctrl.users.create);
+router.put('/:user_id', ctrl.users.edit);
+router.delete('/:user_id', ctrl.users.delete);
+router.post('/', ctrl.users.create);
 
 module.exports = router;
