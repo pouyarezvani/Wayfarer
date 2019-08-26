@@ -8,8 +8,6 @@ import Home from '../pages/Home/Home';
 
 
 
-
-
 const Routes = ({ setCurrentUser, history, currentUser }) => {
 
     const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -31,7 +29,9 @@ const Routes = ({ setCurrentUser, history, currentUser }) => {
             <Route path="/delete_post/:id" render={(props) => <CitiesContainer {...props} currentUser={currentUser} deletePost={props.match.params.id} />} />
             <Route exact path="/city/add_post/:slug" render={(props) => <CitiesContainer {...props} currentUser={currentUser} addPost={true} {...history} slug={props.match.params.slug} />} />
             <PrivateRoute path="/profile" render={(props) => <ProfileContainer {...props} user_id={props.match.params.user_id} />} />
-
+            <PrivateRoute path="/profile" 
+            component={ProfileContainer}
+             />
         </Switch>
     );
 };
