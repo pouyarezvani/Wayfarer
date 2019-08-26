@@ -19,9 +19,14 @@
     background-color: white;
 }
 
-.home-body h3 {
+.home-body h2,
+h1 {
     display: flex;
     justify-content: center;
+}
+
+.heading {
+    margin-top: 1%;
 }
 
 .home-content {
@@ -31,6 +36,11 @@
     padding: 2em;
     margin: 0;
     background-color: white;
+}
+
+.home-body p {
+    margin-left: 1em;
+    margin-right: 1em;
 }
 
 .arrow {
