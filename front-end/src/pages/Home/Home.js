@@ -57,8 +57,8 @@ class Home extends Component {
                 <section className="home-carousel">
                     <div className="carousel-image-container">
                         <img className="carousel-image" src={this.images[this.state.index].url} alt={this.images[this.state.index].alt} />
-                        <button onClick={this.decrementCarousel} >Prev</button>
-                        <button onClick={() => this.incrementCarousel()} >Next</button>
+                        <i onClick={this.decrementCarousel} className="arrow left" ></i>
+                        <i onClick={() => this.incrementCarousel()} className="arrow right" ></i>
                     </div>
                 </section>
                 {this.props.login

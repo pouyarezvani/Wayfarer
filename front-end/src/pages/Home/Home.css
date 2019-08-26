@@ -3,24 +3,27 @@
     position: relative;
 }
 
-.carousel-image-container{
+.carousel-image-container {
     width: 100%;
     height: 70vh;
-}
-.carousel-image{
-    width: 100%;
-    height: 70vh;
+    position: relative;
 }
 
-.main{
+.carousel-image {
+    width: 100%;
+    height: 70vh;
+    position: relative;
+}
+
+.main {
     background-color: white;
 }
-
 
 .home-body h3 {
     display: flex;
     justify-content: center;
 }
+
 .home-content {
     display: grid;
     grid-template-columns: 3fr 3fr 3fr;
@@ -28,4 +31,29 @@
     padding: 2em;
     margin: 0;
     background-color: white;
+}
+
+.arrow {
+    position: absolute;
+    border: solid aqua;
+    border-width: 0 3px 3px 0;
+    padding: 5px;
+    top: 50%;
+    z-index: 10;
+    size: 100;
+    margin: 5;
+    width: 25;
+    height: 25;
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    left: 2%;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    right: 2%;
 }
