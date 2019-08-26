@@ -17,7 +17,6 @@ class Register extends Component {
         text: ''
     };
     handleChange = (event) => {
-        console.log('change')
         this.setState({
             [event.target.name]: event.target.value,
         });
@@ -27,9 +26,12 @@ class Register extends Component {
         event.preventDefault();
         const newUser = this.state;
         axios.post(`${API_URL}/auth/register`, newUser)
-            .then(res => this.props.history.push('/login'))
-            .catch(err => {
-                this.setState({ errors: err.response.data.errors });
+            .then(res => {
+                console.log(res);
+                this.props.history.push('/login')
+            })
+            .catch(error => {
+                console.log(error)
             })
     };
 
