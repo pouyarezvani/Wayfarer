@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import NavBar from './components/NavBar/NavBar';
 import Routes from './config/routes'
 import './App.css';
-import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
 // import { API_URL } from './constants';
 
@@ -30,8 +29,8 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <NavBar  logout={this.handleLogout} currentUser={this.state.currentUser} />
-                <Routes setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser}/>
+                <NavBar logout={this.handleLogout} currentUser={this.state.currentUser} />
+                <Routes setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} />
             </div>
         );
     };

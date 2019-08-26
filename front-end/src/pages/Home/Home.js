@@ -5,57 +5,59 @@ import Register from '../../components/Auth/Register/Register';
 import './Home.css';
 
 class Home extends Component {
+    images = [
+        {
+            url: 'https://images.unsplash.com/photo-1470219556762-1771e7f9427d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80',
+            alt: 'New York City'
+        },
+        {
+            url: 'https://images.unsplash.com/photo-1493540554008-8e3008329feb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+            alt: 'Chicago'
+        },
+        {
+            url: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+            alt: 'Los Angeles'
+        }
+    ];
+
     state = {
         index: 0,
-    }
+    };
+
+    carouselTimer = undefined;
 
     componentDidMount() {
         this.setBackgroundImage()
-    }
+    };
 
-    images = [
-        'https://images.unsplash.com/photo-1470219556762-1771e7f9427d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80',
-        'https://images.unsplash.com/photo-1493540554008-8e3008329feb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-        'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80'
-    ]
+    componentWillUnmount() {
+        clearInterval(this.carouselTimer)
+    };
+
+
     setBackgroundImage = () => {
-        let i = this.state.index;
-        setInterval(() => {
-            this.setState({
-                index: i++,
-            })
-            if (i >= this.images.length) {
-                i = 0
-            }
-        }, 3000)
-    }
+        this.carouselTimer = setInterval(this.incrementCarousel, 3000);
+    };
 
     incrementCarousel = () => {
-        if (this.state.index !== this.images.length - 1) {
-            clearInterval()
-            this.setState((prevstate) => { index: prevstate.index++ }, () => {
-                this.forceUpdate()
-            })
-        } else {
-            this.setState({ index: 0 }, () => this.forceUpdate());
-        }
+        const nextIndex = this.state.index + 1;
+        const hasPassedLastIndex = nextIndex >= this.images.length;
+        this.setState({ index: hasPassedLastIndex ? 0 : nextIndex });
+    };
 
-    }
     decrementCarousel = () => {
-        if (this.state.index !== -1) {
-            this.setState({ index: this.state.index-- })
-        } else {
-            this.state.index = this.images.length - 1;
-        }
-
+        const prevIndex = this.state.index - 1;
+        const hasGoneNegative = prevIndex < 0;
+        this.setState({ index: hasGoneNegative ? this.images.length - 1 : prevIndex });
     }
+
     render() {
         return (
             <div className="home-body">
                 <section className="home-carousel">
                     <div className="carousel-image-container">
-                        <img className="carousel-image" src={this.images[this.state.index]} alt="picture of city" />
-                        <button onClick={this.decrementCarousel} >Prev</button>
+                        <img className="carousel-image" src={this.images[this.state.index].url} alt={this.images[this.state.index].alt} />
+                        <button onClick={() => this.decrementCarousel()} >Prev</button>
                         <button onClick={() => this.incrementCarousel()} >Next</button>
                     </div>
                 </section>
@@ -63,7 +65,7 @@ class Home extends Component {
                     ? <Login />
                     : null
                 }
-                {this.props.register && <Register />}
+                {this.props.register && <Register history={this.props.history} />}
                 <div className="main">
                     <h3>Wayferer is..</h3>
                     <section className="home-content">
