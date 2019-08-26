@@ -76,7 +76,7 @@ function login(req, res) {
         return res.status(400).json({ status: 400, message: 'Please enter your email and password' });
     }
 
-    db.User.findOne({ email: req.username }, (err, foundUser) => {
+    db.User.findOne({ email: req.body.email }, (err, foundUser) => {
         if (err) return res.status(500).json({
             message: "Something went wrong. Please try again",
             error: err
