@@ -24,7 +24,7 @@ class Home extends Component {
         index: 0,
     };
 
-    carouselTimer = undefined;    
+    carouselTimer = undefined;
 
     componentDidMount() {
         this.setBackgroundImage()
