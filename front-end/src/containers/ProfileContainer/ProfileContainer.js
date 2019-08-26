@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
+import { API_URL } from '../../'
 
 import Profile from '../../components/Profile/Profile';
 import './ProfileContainer.css'
