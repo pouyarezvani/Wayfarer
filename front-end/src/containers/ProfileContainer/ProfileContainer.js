@@ -19,7 +19,7 @@ class ProfileContainer extends Component {
     componentDidMount() {
         const userId = localStorage.getItem('uid');
         axios.get(`${API_URL}/user/${userId}`, { withCredentials: true })
-            console.log(res.data)
+            // console.log(res.data)
             .then(res => this.setState({ profile: res.data }))
             .catch(err => console.log(err))
     }
