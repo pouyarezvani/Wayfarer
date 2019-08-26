@@ -13,7 +13,7 @@ class CitiesContainer extends Component {
         cities: [],
         defaultCity: {
             id: 1,
-            name: 'San Francisco',
+            name: 'Chicago',
             image: 'https://images.unsplash.com/photo-1470219556762-1771e7f9427d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80'
         },
         posts: [],
