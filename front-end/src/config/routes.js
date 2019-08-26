@@ -27,9 +27,9 @@ const Routes = ({ setCurrentUser, history, currentUser }) => {
             <Route path='/register' render={(props) => <Home {...props} register={props.match.path} />} />
             <Route path="/post/:id" render={(props) => <PostContainer {...props} id={props.match.params.id} />} />
             <Route path="/cities/:city_name" render={(props) => <CitiesContainer {...props} cityName={props.match.params.city_name} />} />
-            <Route path="/cities" component={CitiesContainer} />
-
-            <PrivateRoute path="/add_post" render={(props) => <CitiesContainer {...props} addPost={true} />} />
+            <Route exact path="/cities" render={(props) => <CitiesContainer {...props} currentUser={currentUser} />} />
+            <Route path="/delete_post/:id" render={(props) => <CitiesContainer {...props} currentUser={currentUser} deletePost={props.match.params.id} />} />
+            <Route exact path="/city/add_post/:slug" render={(props) => <CitiesContainer {...props} currentUser={currentUser} addPost={true} {...history} slug={props.match.params.slug} />} />
             <PrivateRoute path="/profile" render={(props) => <ProfileContainer {...props} user_id={props.match.params.user_id} />} />
 
         </Switch>
