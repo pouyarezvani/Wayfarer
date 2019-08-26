@@ -6,10 +6,10 @@ import Posts from './Posts/Posts';
 // Styles
 import './CityPosts.css';
 
-const CityPosts = ({ slug, posts, users, name, image, postImage, handleDelete, handleEdit }) => {
+const CityPosts = ({ slug, description, posts, users, name, image, postImage, handleDelete, handleEdit }) => {
     return (
-        <>
-            <CityHeader name={name} image={image} />
+        <div className="container">
+            <CityHeader name={name} image={image} description={description} />
             <div className="posts-header">
                 <h2>Posts</h2>
                 <Link to={`/city/add_post/${slug}`} className="post-btn">+</Link>
@@ -23,7 +23,8 @@ const CityPosts = ({ slug, posts, users, name, image, postImage, handleDelete, h
             />}
             {/* {posts ? <Posts posts={posts} users={users} /> : 'Sorry, no posts have been created yet...'} */}
 
-        </>
+        </div>
+
     );
 };
 
