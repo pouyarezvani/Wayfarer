@@ -13,7 +13,9 @@ class Register extends Component {
         email: '',
         password: '',
         password2: '',
-        errors: null,
+        errors: [],
+        text: '',
+        shouldComponentDisplayErrors: false
     };
     handleChange = (event) => {
         this.setState({
@@ -24,24 +26,28 @@ class Register extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const newUser = this.state;
-        axios.post(`${API_URL}/auth/register`, newUser)
-            .then(res => this.props.history.push('/login'))
-            .catch(err => {
-                this.setState({ errors: err.response.data.errors });
+        axios.post(`${API_URL}/auth/signup`, newUser)
+            .then(res => {
+                console.log(res);
+                this.props.history.push('/login')
+            })
+            .catch(error => {
+                console.log(error);
+                // this.setState({ errors: error, shouldComponentDisplayErrors: true });
             })
     };
 
     render() {
         return (
             <div className="register-row">
-                {this.state.errors && this.state.errors.map((e, i) => (
+                {/* {this.state.shouldComponentDisplayErrors && this.state.errors.map((e, i) => (
                     <div className="alert" role="alert" key={i}>
                         {e.message}
                         <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                ))}
+                ))} */}
                 <section id="register">
                     <h2>Register</h2>
                     <Link to="/"><button>X</button></Link>
@@ -56,11 +62,11 @@ class Register extends Component {
                         </div>
                         <div className="form-group">
                             <label htmlFor="password">Password</label>
-                            <input type="password" id="password" name="password" value={this.state.email} onChange={this.handleChange} className="auth-input" />
+                            <input type="password" id="password" name="password" value={this.state.password} onChange={this.handleChange} className="auth-input" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="password2">Confirm Password</label>
-                            <input type="password2" id="password2" name="password2" value={this.state.email} onChange={this.handleChange} className="auth-input" />
+                            <input type="password" id="password2" name="password2" value={this.state.password2} onChange={this.handleChange} className="auth-input" />
                         </div>
                         <button type="submit" className="auth-btn">Register</button>
                     </form>
