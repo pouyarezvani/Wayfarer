@@ -5,24 +5,18 @@ function getTime() {
 };
 
 const index = (req, res) => {
-  db.City.find({}, (err, cities) => {
-    if(err) return res.status(500).json({
-      status: 500,
-      message: "Something went wrong, please try again",
-      error: err });
-
-    return res.json({ cities });
-  });
+  db.City.find({})
+    .populate('posts')
+    .exec((error, cities) => res.json(cities));
 };
 
 const show = (req, res) => {
   db.City.findById(req.params.city_id, (err, foundCity) => {
-    if(err) return res.status(500).json({
+    if (err) return res.status(500).json({
       status: 500,
       message: "Something went wrong, please try again"
     });
-     
-    return res.json({ status:200, message: foundCity });
+    return res.json({ status: 200, message: foundCity });
   });
 };
 
@@ -33,7 +27,7 @@ const create = (req, res) => {
       status: 400,
       message: "Something went wrong, please try again"
     });
-    
+
     return res.status(201).json({
       status: 201,
       message: createdCity,
@@ -44,21 +38,23 @@ const create = (req, res) => {
 
 const remove = (req, res) => {
   db.City.deleteOne({ _id: req.params.city_id }, (err, city) => {
-    if(err) return res.status(500).json({
+    if (err) return res.status(500).json({
       status: 500,
       message: "Something went wrong, please try again",
-      error: err });
-    
+      error: err
+    });
+
     return res.json({
       status: 200,
       message: "deleted successfully",
-      city});
+      city
+    });
   });
 };
 
 const update = (req, res) => {
   db.City.findByIdAndUpdate(req.params.city_id, req.body, { new: true }, (err, updatedCity) => {
-    if(err) return res.status(400).json({
+    if (err) return res.status(400).json({
       status: 400,
       message: "something went wrong, please try again"
     });

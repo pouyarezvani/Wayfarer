@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const ctrl = require('../controllers');
-const authRequired = require('../middleware/authRequired');
+const authRequired = require('../middleware/authRequired.js');
+const adminRequired = require('../middleware/adminRequired.js');
+
 
 // Endpoint => 'api/v1/users'
 

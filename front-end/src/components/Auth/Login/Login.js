@@ -12,12 +12,6 @@ class Login extends Component {
         error: null,
     };
 
-    componentDidMount() {
-        axios.get(`${API_URL}/users/`)
-            .then(res => console.log(res))
-            .catch(error => console.log(error))
-    }
-
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
@@ -28,8 +22,12 @@ class Login extends Component {
         event.preventDefault();
         const userInfo = this.state;
         axios.post(`${API_URL}/auth/login`, userInfo, { withCredentials: true })
-            .then(res => this.props.setCurrentUser(res.data.id))
-            .catch(err => this.setState({ error: err.response.data.message }));
+            .then(res => {
+                this.props.setCurrentUser(res.data.id);
+                this.props.history.push('/profile');
+            })
+
+            .catch(err => this.setState({ error: err }));
     };
 
     render() {
@@ -40,7 +38,7 @@ class Login extends Component {
                     <h1>Login</h1>
                     <Link to="/"><button>X</button></Link>
 
-                    <form onSubmit={this.handleSubmit} method="POST" action={`${API_URL}/users`}>
+                    <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
                             <input value={this.state.email} onChange={this.handleChange} className="auth-input" type="email" id="email" name="email" placeholder="example@example.com" />
