@@ -40,6 +40,7 @@ class CitiesContainer extends Component {
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.cityName !== this.props.cityName) {
             this.sendCityProp();
+            this.getCities();
         };
     };
 
@@ -136,6 +137,7 @@ class CitiesContainer extends Component {
 
                     {this.props.cityName
                         ? <CityPosts
+                            currentUser={this.props.currentUser}
                             name={this.state.cityAsProp.name}
                             image={this.state.cityAsProp.image}
                             posts={this.state.cityAsProp.posts}

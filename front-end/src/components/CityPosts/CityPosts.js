@@ -6,15 +6,18 @@ import Posts from './Posts/Posts';
 // Styles
 import './CityPosts.css';
 
-const CityPosts = ({ slug, posts, users, name, image, postImage, handleDelete, handleEdit }) => {
+const CityPosts = ({ currentUser, slug, posts, users, name, image, postImage, handleDelete, handleEdit }) => {
     return (
         <>
             <CityHeader name={name} image={image} />
             <div className="posts-header">
                 <h2>Posts</h2>
-                <Link to={`/city/add_post/${slug}`} className="post-btn">+</Link>
+                {currentUser &&
+                    <Link to={`/city/add_post/${slug}`} className="post-btn">+</Link>
+                }
             </div>
             {posts && <Posts
+                currentUser={currentUser}
                 posts={posts}
                 users={users}
                 image={postImage}
