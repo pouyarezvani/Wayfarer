@@ -21,6 +21,7 @@ module.exports = {
             if (err) return res.status(500).json({ status: 500, message: 'Something went wrong. Please try again.' });
             res.status(200).json({ 
                 status: 200, 
+                numberOfResults: allUsers.length,
                 data: allUsers,
                 requestAt: getTime(),
             });
@@ -28,13 +29,13 @@ module.exports = {
     },
 
     delete: (req, res) => {
-        db.User.findOneAndDelete(
-            { name: req.params.user_id },
+        db.User.findByIdAndDelete(
+            req.params.user_id,
             ( error, deletedUser ) => {
                 if (error) return res.status(500).json({ status: 500, message: 'Something went wrong. Please try again.'});
                 res.status(200).json({ 
                     status: 200, 
-                    data: `Success - deleted ${req.params.user_id}`,
+                    data: `Success - deleted ${deletedUser.username}`,
                     requestedAt: getTime(),
                 });
             },
@@ -42,7 +43,8 @@ module.exports = {
     },
 
     edit: (req, res) => {
-        db.User.findOneAndUpdate(req.params.user_id, req.body, { new: true }, { password: 0, _v: 0 }, (err, editedUser) => {
+        db.User.findByIdAndUpdate(req.params.user_id, req.body, { new: true }, (err, editedUser) => {
+            console.log(req.body);
             if (err) return res.status(400).json({ status: 400, message: 'Something went wrong. Please try again.' 
             }),
             res.status(202).json({
@@ -51,5 +53,20 @@ module.exports = {
                 requestedAt: getTime(),
             });
         });
-    }
+    }, 
+    create: (req, res) => {
+        const newUser = req.body;
+
+        db.User.create(newUser, (err, createdUser) => {
+            if (err) return res.status(400).json({
+                status: 400,
+                message: 'Something went wrong, please try again'
+            });
+            res.status(201).json({
+                status: 201,
+                data: createdUser,
+                requestedAt: getTime()
+            });
+        });
+    },
 };

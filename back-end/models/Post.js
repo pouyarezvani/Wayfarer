@@ -3,33 +3,29 @@ const Schema = mongoose.Schema;
 const Comment = require('./Comment');
 
 const PostSchema = new Schema({
+    username: {
+        type: String,
+        required: true
+    },
+    city_slug: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
-        requried: true,
+        required: true,
         maxlength: 200,
         minlength: 1
     },
-    user: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        }
-    ],
     content: {
         type: String,
-        required: true, 
+        required: true,
         maxlength: 1000
     },
-    city: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'City'
-        }
-    ],
     date_posted: {
         type: Date,
         default: Date.now
-    }, 
+    },
     comments: [Comment.schema]
 });
 

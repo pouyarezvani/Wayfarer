@@ -5,20 +5,27 @@ const CitySchema = new Schema({
     name: {
         type: String,
         required: true,
-        maxlength: 30
+        maxlength: 30,
+        unique: true
     },
     image: {
         type: String,
         required: true
-    }, 
+    },
     description: {
         type: String,
         required: true
     },
+    posts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Post'
+        }
+    ],
     slug: {
-        type: String,
-        required: true
-    }
+        type: String
+    },
+
 });
 
 const City = mongoose.model('City', CitySchema);

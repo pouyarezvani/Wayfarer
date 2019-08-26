@@ -10,5 +10,6 @@ router.get('/:post_id', ctrl.post.show);
 router.get('/', ctrl.post.index);
 router.put('/:post_id', ctrl.post.edit);
 router.post('/', ctrl.post.create);
+router.delete('/:post_id', ctrl.post.delete);
 
 module.exports = router;
