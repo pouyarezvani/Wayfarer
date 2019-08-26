@@ -25,7 +25,7 @@ class Register extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const newUser = this.state;
-        axios.post(`${API_URL}/auth/register`, newUser)
+        axios.post(`${API_URL}/auth/signup`, newUser)
             .then(res => {
                 console.log(res);
                 this.props.history.push('/login')
