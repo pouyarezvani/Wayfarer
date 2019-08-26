@@ -1,9 +1,12 @@
 :root {
     --seagreen-dark-cerulean: #1b4079;
+    --dark-onyx: #373E40;
     --seagreen-teal-blue: #4d7c8a;
     --seagreen-dark-sea-green: #87ad88;
     --seagreen-medium-spring-bud: #cbdf90;
     --white: white;
+    --winterfreen: #488286;
+    --pale-aquea: #B7d5d4;
 }
 
 body {
@@ -87,7 +90,6 @@ h2 {
 }
 
 ;
-
 @media (min-width: 768px) {
     .home-content {
         display: flex;
