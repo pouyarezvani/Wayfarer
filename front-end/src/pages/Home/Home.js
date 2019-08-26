@@ -24,7 +24,7 @@ class Home extends Component {
         index: 0,
     };
 
-    carouselTimer = undefined;
+    carouselTimer = undefined;    
 
     componentDidMount() {
         this.setBackgroundImage()
@@ -49,7 +49,7 @@ class Home extends Component {
         const prevIndex = this.state.index - 1;
         const hasGoneNegative = prevIndex < 0;
         this.setState({ index: hasGoneNegative ? this.images.length - 1 : prevIndex });
-    }
+    };
 
     render() {
         return (
@@ -57,8 +57,8 @@ class Home extends Component {
                 <section className="home-carousel">
                     <div className="carousel-image-container">
                         <img className="carousel-image" src={this.images[this.state.index].url} alt={this.images[this.state.index].alt} />
-                        <button onClick={() => this.decrementCarousel()} >Prev</button>
-                        <button onClick={() => this.incrementCarousel()} >Next</button>
+                        <i onClick={this.decrementCarousel} className="arrow left"></i>
+                        <i onClick={() => this.incrementCarousel()} className="arrow right"></i>
                     </div>
                 </section>
                 {this.props.login
@@ -67,18 +67,18 @@ class Home extends Component {
                 }
                 {this.props.register && <Register history={this.props.history} />}
                 <div className="main">
-                    <h3>Wayferer is..</h3>
+                    <h1 className="heading">Wayfarer is..</h1>
                     <section className="home-content">
                         <div className="home-card">
-                            <h4>Topic</h4>
+                            <h2>Topic</h2>
                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptatibus facilis nostrum vero ipsum unde, odit magni consequatur in sed tempora vitae nulla laudantium ullam accusamus sit optio corporis et.</p>
                         </div>
                         <div className="home-card">
-                            <h4>Topic</h4>
+                            <h2>Topic</h2>
                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptatibus facilis nostrum vero ipsum unde, odit magni consequatur in sed tempora vitae nulla laudantium ullam accusamus sit optio corporis et.</p>
                         </div>
                         <div className="home-card">
-                            <h4>Topic</h4>
+                            <h2>Topic</h2>
                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptatibus facilis nostrum vero ipsum unde, odit magni consequatur in sed tempora vitae nulla laudantium ullam accusamus sit optio corporis et.</p>
                         </div>
                     </section>

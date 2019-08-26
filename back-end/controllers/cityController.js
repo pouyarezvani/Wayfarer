@@ -16,7 +16,6 @@ const show = (req, res) => {
       status: 500,
       message: "Something went wrong, please try again"
     });
-
     return res.json({ status: 200, message: foundCity });
   });
 };
