@@ -24,7 +24,7 @@ class Home extends Component {
         index: 0,
     };
 
-    carouselTimer = undefined;
+    carouselTimer = undefined;    
 
     componentDidMount() {
         this.setBackgroundImage()
@@ -49,7 +49,7 @@ class Home extends Component {
         const prevIndex = this.state.index - 1;
         const hasGoneNegative = prevIndex < 0;
         this.setState({ index: hasGoneNegative ? this.images.length - 1 : prevIndex });
-    }
+    };
 
     render() {
         return (
