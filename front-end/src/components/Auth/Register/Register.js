@@ -32,7 +32,7 @@ class Register extends Component {
                 this.props.history.push('/login')
             })
             .catch(error => {
-                console.log(error);
+                console.log(error.response);
                 // this.setState({ errors: error, shouldComponentDisplayErrors: true });
             })
     };

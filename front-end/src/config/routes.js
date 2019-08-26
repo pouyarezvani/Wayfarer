@@ -12,13 +12,13 @@ import Home from '../pages/Home/Home';
 
 const Routes = ({ setCurrentUser, history, currentUser }) => {
 
-    // const PrivateRoute = ({ component: Component, ...rest }) => (
-    //     <Route {...rest} render={(props) => (
-    //         currentUser
-    //             ? <Component {...props} />
-    //             : <Redirect to='/login' />
-    //     )} />
-    // );
+    const PrivateRoute = ({ component: Component, ...rest }) => (
+        <Route {...rest} render={(props) => (
+            currentUser
+                ? <Component {...props} />
+                : <Redirect to='/login' />
+        )} />
+    );
 
     return (
         <Switch>
