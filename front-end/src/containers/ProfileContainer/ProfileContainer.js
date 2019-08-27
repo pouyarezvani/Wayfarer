@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import Profile from '../../components/Profile/Profile';
-import CityPosts from '../../components/CityPosts/CityPosts';
+import { Link } from 'react-router-dom';
 import './ProfileContainer.css'
 
 class ProfileContainer extends Component {
     state = {
         profile: null,
         posts: [],
-        postsFiltered: [],
+        postsFiltered: null,
         errors: null
     };
 
@@ -44,25 +44,18 @@ class ProfileContainer extends Component {
     getPosts = () => {
         axios.get(`${API_URL}/posts`)
             .then(response => {
-                this.setState({ 
-                    posts: response.data
-            })
-            // console.log(this.state.posts)
-            this.state.posts.data.map((post) => {
+            const filtered = response.data.data.filter((post) => {
                 if (post.username === this.state.profile.data.username) {
-                    this.state.postsFiltered.push(post)
+                    return post
                 }
                 })
-                console.log(this.state.postsFiltered)
-                console.log(this.state.posts.data)
+                this.setState({postsFiltered:filtered});
         })
         .catch(error => console.log(error));
     };
     
 
     render() {
-        console.log(this.state.postsFiltered)
-        console.log(this.state.posts.data)
         return (
             <div className="post-container">
                 {this.state.errors && this.state.errors.map((error, index) => (
@@ -74,9 +67,11 @@ class ProfileContainer extends Component {
                 <div className="post-container">
                     <h2>Your Posts</h2>
                     {this.state.postsFiltered && this.state.postsFiltered.map(foundPost => (
-                    <div className="post" key={foundPost}><h4>{foundPost.title} </h4>
-                    <p>{foundPost.content}</p>
-                    <p> Author: {foundPost.username}</p>
+                    <div className="post" key={foundPost._id}>
+                        <Link to={`/cities/${foundPost.city_slug}`}>Check out the City</Link>
+                        <h4>{foundPost.title} </h4>
+                        <p>{foundPost.content}</p>
+                        <p> Author: {foundPost.username}</p>
                     </div>
                     ))}
                 </div>
