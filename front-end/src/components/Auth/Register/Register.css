@@ -9,12 +9,12 @@
     position: fixed;
 }
 
-.register-header {
-    text-align: center !important;
-}
-
 form {
     padding: 1em;
+}
+
+.row h2 {
+    margin-left: 18rem;
 }
 
 .form-control {

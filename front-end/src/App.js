@@ -18,7 +18,6 @@ class App extends Component {
     };
 
     handleLogout = () => {
-        console.log('click');
         localStorage.removeItem('uid');
         axios.post(`${API_URL}/auth/logout`, { withCredentials: true })
             .then(() => {
