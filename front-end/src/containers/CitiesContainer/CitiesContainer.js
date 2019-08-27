@@ -97,6 +97,7 @@ class CitiesContainer extends Component {
 
     submitPost = event => {
         event.preventDefault();
+        const currentPosts = this.state.posts;
         axios.post(`${API_URL}/posts/`, {
             username: this.state.user.username,
             city_slug: this.props.cityName,
@@ -104,7 +105,8 @@ class CitiesContainer extends Component {
             content: this.state.content
         }, { withCredentials: true })
             .then(res => {
-                this.getCities()
+                currentPosts.push(res.data.data);
+                this.setState({ posts: currentPosts });
             })
             .catch(error => {
                 console.log(error.response);
