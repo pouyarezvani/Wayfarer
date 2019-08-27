@@ -52,7 +52,6 @@ class CitiesContainer extends Component {
         });
     };
 
-
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
@@ -82,7 +81,6 @@ class CitiesContainer extends Component {
                         username: response.data.data.username
                     }
                 })
-
             })
             .catch(error => console.log(error.response));
     }
@@ -140,6 +138,7 @@ class CitiesContainer extends Component {
                             currentUser={this.props.currentUser}
                             name={this.state.cityAsProp.name}
                             image={this.state.cityAsProp.image}
+                            description={this.state.cityAsProp.description}
                             posts={this.state.cityAsProp.posts}
                             slug={this.state.cityAsProp.slug}
                             postImage={this.state.user.image_url}

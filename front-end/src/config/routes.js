@@ -29,9 +29,9 @@ const Routes = ({ setCurrentUser, history, currentUser }) => {
             <Route path="/delete_post/:id" render={(props) => <CitiesContainer {...props} currentUser={currentUser} deletePost={props.match.params.id} />} />
             <Route exact path="/city/add_post/:cityName" render={(props) => <CitiesContainer {...props} currentUser={currentUser} addPost={true} {...history} cityName={props.match.params.cityName} />} />
             <PrivateRoute path="/profile" render={(props) => <ProfileContainer {...props} user_id={props.match.params.user_id} />} />
-            <PrivateRoute path="/profile" 
-            component={ProfileContainer}
-             />
+            <PrivateRoute path="/profile"
+                component={ProfileContainer}
+            />
         </Switch>
     );
 };
