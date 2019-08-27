@@ -1,10 +1,19 @@
-.login-row{
-    top:20%;
-    left:25%;
-    height:50vh;
-    width: 50vw;
+.login {
+    top: 20%;
+    left: 25%;
+    width: 50%;
     background-color: white;
     border: 1px solid black;
+    opacity: .9;
+    border-radius: 4px;
     position: fixed;
-    z-index: 1;
+}
+
+.login .submit {
+    border: 1px solid black;
+    border-radius: 4px;
+    background: #1b4079;
+    color: white;
+    border: none;
+    padding: 10px
 }
