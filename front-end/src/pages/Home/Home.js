@@ -62,7 +62,7 @@ class Home extends Component {
                     </div>
                 </section>
                 {this.props.login
-                    ? <Login />
+                    ? <Login setCurrentUser={this.props.setCurrentUser} history={this.props.history} />
                     : null
                 }
                 {this.props.register && <Register history={this.props.history} />}

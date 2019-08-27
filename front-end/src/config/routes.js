@@ -12,23 +12,26 @@ import Home from '../pages/Home/Home';
 
 const Routes = ({ setCurrentUser, history, currentUser }) => {
 
-    // const PrivateRoute = ({ component: Component, ...rest }) => (
-    //     <Route {...rest} render={(props) => (
-    //         currentUser
-    //             ? <Component {...props} />
-    //             : <Redirect to='/login' />
-    //     )} />
-    // );
+    const PrivateRoute = ({ component: Component, ...rest }) => (
+        <Route {...rest} render={(props) => (
+            currentUser
+                ? <Component {...props} />
+                : <Redirect to='/login' />
+        )} />
+    );
 
     return (
         <Switch>
             <Route exact path="/" component={Home} />
             <Route path='/login' render={(props) => <Home {...props} login={props.match.path} setCurrentUser={setCurrentUser} {...history} />} />
             <Route path='/register' render={(props) => <Home {...props} register={props.match.path} />} />
-            <Route path="/post/:id" render={(props) => <PostContainer {...props} id={props.match.params.id} />} />
+            <Route path="/post/:id" render={(props) => <PostContainer {...props} id={props.match.params.id} currentUser={currentUser} />} />
             <Route path="/cities/:city_name" render={(props) => <CitiesContainer {...props} cityName={props.match.params.city_name} />} />
             <Route path="/cities" component={CitiesContainer} />
-            <Route path="/profile" render={(props) => <ProfileContainer {...props} user_id={props.match.params.user_id} />} />
+
+            <PrivateRoute path="/add_post" render={(props) => <CitiesContainer {...props} addPost={true} />} ƒ/>
+            <PrivateRoute path="/profile" render={(props) => <ProfileContainer {...props} user_id={props.match.params.user_id} />} />
+
         </Switch>
     );
 };

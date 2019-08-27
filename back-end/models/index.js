@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const DB_URL = process.env.DB_URI || 'mongodb://localhost:27017/project-wayfarer';
+const DB_URL = process.env.DB_URI || 'mongodb+srv://joseph:aabb1122@cluster0-fqcif.mongodb.net/test?retryWrites=true&w=majority';
 
 console.log(DB_URL);
 
