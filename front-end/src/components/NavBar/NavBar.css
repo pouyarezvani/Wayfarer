@@ -1,29 +1,31 @@
-nav{
+nav {
     background-color: black;
     display: flex;
     justify-content: space-between;
-
 }
 
-nav h1{
-    padding:.5em;
+nav h1 {
+    padding: .5em;
 }
+
 .nav-li {
     color: white;
+    text-decoration: none !important;
 }
-.nav-li:hover { 
+
+.nav-li:hover {
     color: orange;
 }
 
-.nav-items{
+.nav-items {
     display: flex;
     justify-content: flex-end;
     align-items: baseline;
- 
 }
-.nav-items li { 
-    list-style: none;
+
+.nav-items li {
+    list-style-type: none !important;
     padding: .5em;
     margin-right: 2em;
-    margin-top: .5em;
+    margin-top: 1.5em;
 }

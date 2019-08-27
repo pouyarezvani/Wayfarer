@@ -20,7 +20,7 @@ class ProfileContainer extends Component {
     };
 
     getCurrentUserPosts = (userid) => {
-        axios.get(`${API_URL}/posts/${userid}`)
+        axios.get(`${API_URL}/posts`)
             .then(response => {
                 this.setState({ posts: response.data })
             })
@@ -28,9 +28,9 @@ class ProfileContainer extends Component {
     };
 
     componentDidMount() {
+        this.getCurrentUserPosts();
         console.log(this.state.cities);
         const userId = localStorage.getItem('uid');
-        this.getCurrentUserPosts(userId);
         axios.get(`${API_URL}/users/${userId}`, { withCredentials: true })
             .then(res => this.setState({ profile: res.data }))
             .catch(err => console.log(err))
