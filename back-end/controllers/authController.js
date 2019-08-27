@@ -78,13 +78,18 @@ function login(req, res) {
 
     db.User.findOne({ email: req.body.email }, (err, foundUser) => {
         if (err) return res.status(500).json({
+            status: 500,
             message: "Something went wrong. Please try again",
             error: err
         });
 
-        if (!foundUser) return res.status(400).json({
-            message: "Email or password is incorrect"
-        });
+        if (!foundUser) {
+            return res.status(400).json({
+                status: 400,
+                error: err,
+                message: "Email or password is incorrect"
+            });
+        }
 
         bcrypt.compare(req.body.password, foundUser.password, (err, isMatch) => {
             if (err) return res.status(500).json({
