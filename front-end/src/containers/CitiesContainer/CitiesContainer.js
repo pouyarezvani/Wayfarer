@@ -158,7 +158,7 @@ class CitiesContainer extends Component {
                             <label>Title</label>
                             <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
                             <label>Content</label>
-                            <input type="text" name="content" value={this.state.content} onChange={this.handleChange} />
+                            <input id="add-post-content" type="text" name="content" value={this.state.content} onChange={this.handleChange} />
                             <button onClick={this.submitPost}>Submit</button>
                         </form>
                     </div>

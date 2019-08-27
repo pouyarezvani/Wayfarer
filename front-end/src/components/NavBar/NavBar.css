@@ -2,6 +2,7 @@ nav {
     background-color: black;
     display: flex;
     justify-content: space-between;
+    height:9vh;
 }
 
 nav h1 {

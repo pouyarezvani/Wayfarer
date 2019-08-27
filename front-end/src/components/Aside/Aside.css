@@ -1,5 +1,7 @@
 .aside {
     background-color: rgb(243, 115, 115);
+    overflow: scroll;
+    height:90vh;
 }
 
 .aside-header {

@@ -1,3 +1,7 @@
+.city-posts{
+    overflow: scroll;
+}
+
 .city-header {
     display: flex;
     margin-top: 10px;
@@ -25,11 +29,14 @@ h5 {
 .posts-header {
     display: flex;
     justify-content: space-between;
-    padding: 4em;
+}
+.posts-header h2 {
+    margin-top: .5em;
 }
 
 .post-btn {
     font-size: 3em;
+    margin-right:1em;
 }
 
 
@@ -65,4 +72,8 @@ h5 {
     grid-column-start: 2;
     grid-column-end: 3;
     margin-right: 2em;
+}
+
+.posts-container{
+    overflow: scroll;
 }
