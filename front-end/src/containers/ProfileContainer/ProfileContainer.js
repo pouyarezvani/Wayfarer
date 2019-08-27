@@ -61,6 +61,8 @@ class ProfileContainer extends Component {
     
 
     render() {
+        console.log(this.state.postsFiltered)
+        console.log(this.state.posts.data)
         return (
             <div className="post-container">
                 {this.state.errors && this.state.errors.map((error, index) => (
@@ -71,7 +73,7 @@ class ProfileContainer extends Component {
                 {this.state.profile && <Profile user={this.state.profile.data}/>}
                 <div className="post-container">
                     <h2>Your Posts</h2>
-                    {this.state.posts.data && this.state.posts.data.map(foundPost => (
+                    {this.state.postsFiltered && this.state.postsFiltered.map(foundPost => (
                     <div className="post" key={foundPost}><h4>{foundPost.title} </h4>
                     <p>{foundPost.content}</p>
                     <p> Author: {foundPost.username}</p>
