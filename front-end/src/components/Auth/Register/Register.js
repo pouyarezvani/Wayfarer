@@ -28,7 +28,6 @@ class Register extends Component {
         const newUser = this.state;
         axios.post(`${API_URL}/auth/signup`, newUser)
             .then(res => {
-                console.log(res);
                 this.props.history.push('/login')
             })
             .catch(error => {
