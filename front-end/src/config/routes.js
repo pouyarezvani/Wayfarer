@@ -12,13 +12,13 @@ import Home from '../pages/Home/Home';
 
 const Routes = ({ setCurrentUser, history, currentUser }) => {
 
-    // const PrivateRoute = ({ component: Component, ...rest }) => (
-    //     <Route {...rest} render={(props) => (
-    //         currentUser
-    //             ? <Component {...props} />
-    //             : <Redirect to='/login' />
-    //     )} />
-    // );
+    const PrivateRoute = ({ component: Component, ...rest }) => (
+        <Route {...rest} render={(props) => (
+            currentUser
+                ? <Component {...props} />
+                : <Redirect to='/login' />
+        )} />
+    );
 
     return (
         <Switch>
@@ -28,7 +28,10 @@ const Routes = ({ setCurrentUser, history, currentUser }) => {
             <Route path="/post/:id" render={(props) => <PostContainer {...props} id={props.match.params.id} />} />
             <Route path="/cities/:city_name" render={(props) => <CitiesContainer {...props} cityName={props.match.params.city_name} />} />
             <Route path="/cities" component={CitiesContainer} />
-            <Route path="/profile" render={(props) => <ProfileContainer {...props} user_id={props.match.params.user_id} />} />
+
+            <PrivateRoute path="/add_post" render={(props) => <CitiesContainer {...props} addPost={true} />} />
+            <PrivateRoute path="/profile" render={(props) => <ProfileContainer {...props} user_id={props.match.params.user_id} />} />
+
         </Switch>
     );
 };

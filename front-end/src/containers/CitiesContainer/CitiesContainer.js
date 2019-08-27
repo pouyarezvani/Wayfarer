@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 // internal components
 import Aside from '../../components/Aside/Aside';
@@ -18,7 +19,10 @@ class CitiesContainer extends Component {
         },
         posts: [],
         cityAsProp: {},
-        displayPosts: false,
+        newPost: {
+            title: '',
+            content: ''
+        }
     };
 
     componentDidMount() {
@@ -43,6 +47,7 @@ class CitiesContainer extends Component {
         });
     };
 
+    // API Calls via Axios
     getCities = () => {
         axios.get(`${API_URL}/cities`)
             .then(response => {
@@ -50,6 +55,18 @@ class CitiesContainer extends Component {
             })
             .catch(error => console.log(error));
     }
+
+    submitPost = event => {
+        event.preventDefault();
+        axios.post(`${API_URL}/posts`, {
+            username: '',
+            city_slug: this.cityAsProp.slug,
+            title: this.state.newPost.postTitle,
+            content: this.state.newPost.content
+        })
+            .then(res => console.log(res));
+    }
+
 
     render() {
         return (
@@ -64,6 +81,7 @@ class CitiesContainer extends Component {
                             name={this.state.cityAsProp.name}
                             image={this.state.cityAsProp.image}
                             posts={this.state.cityAsProp.posts}
+                            slug={this.state.cityAsProp.slug}
                             cities={this.state.cities}
                             users={this.state.users}
                         />
@@ -72,6 +90,18 @@ class CitiesContainer extends Component {
                             image={this.state.defaultCity.image}
                             posts={this.state.posts} />}
                 </div>
+                {this.props.addPost
+                    && <div className="add-post">
+                        <Link to='/cities'>x</Link>
+                        <form>
+                            <label>Name</label>
+                            <input type="text" />
+                            <label>Content</label>
+                            <input type="text" />
+                        </form>
+                    </div>
+                }
+
             </div>
         );
     };

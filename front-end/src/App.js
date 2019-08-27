@@ -17,13 +17,15 @@ class App extends Component {
         this.setState({ currentUser: userId });
     };
 
-    handleLogout = (userId) => {
+    handleLogout = () => {
+        console.log('click');
         localStorage.removeItem('uid');
         axios.post(`${API_URL}/auth/logout`, { withCredentials: true })
             .then(() => {
                 this.setState({ currentUser: null });
                 this.props.history.push('/login');
-            });
+            })
+            .catch(error => console.log(error.response))
     };
 
     render() {
