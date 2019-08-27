@@ -133,9 +133,6 @@ class CitiesContainer extends Component {
                 </div>
                 <div className="city-posts">
 
-<<<<<<< HEAD
-                    
-=======
                     {this.props.cityName
                         ? <CityPosts
                             currentUser={this.props.currentUser}
@@ -152,7 +149,6 @@ class CitiesContainer extends Component {
                             name={this.state.defaultCity.name}
                             image={this.state.defaultCity.image}
                             posts={this.state.posts} />}
->>>>>>> 2bdc31c3e68b6eef26fa6f96ef8ee6120efa4769
                 </div>
 
                 {this.props.addPost
