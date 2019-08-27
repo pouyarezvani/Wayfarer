@@ -1,37 +1,28 @@
 import React, { Component } from 'react';
 // styles
 import './PostContainer.css';
-
+import axios from 'axios';
 
 class PostContainer extends Component {
-    state = {
-        post: {
-            id: 1,
-            name: 'San Francisco',
-            content: "Fun time in San Francisco",
-            imageUrl: "https://i.stack.imgur.com/34AD2.jpg",
-            date: new Date().toLocaleDateString,
-        }
-
-    }
-
-    componentDidMount() {
-        // make axios call with url with id of the param
-        // url = localhost:3001/api/v1/posts:id
-        // set state to the res.data
-        // send that as prop to post below
+    async componentDidMount() {
+        axios.get(`http://localhost:3001/api/v1/posts/${this.props.id}`)
+        .then((response) => {
+            this.setState({ post: response.data.data })
+        })
+        .catch((error) => {
+            console.log(error)
+        }); 
     }
 
     render() {
         return (
             <div className="post-container">
-                <div className="post">
-                    <img src={this.state.post.imageUrl} alt={`${this.state.post.name}`} />
-                    <h1>{this.state.post.name}</h1>
+                {this.state && <div className="post">
+                    <img width="512px" src={this.state.post.city_slug} alt={`${this.state.post.title}`} />
+                    <h1>{this.state.post.title}</h1>
                     <p>{this.state.post.content}</p>
-                    <p>Posted By: Eduardo</p>
-                </div>
-
+                    <p>Posted By: {this.state.post.username}</p>
+                </div>}
             </div>
         );
     };
