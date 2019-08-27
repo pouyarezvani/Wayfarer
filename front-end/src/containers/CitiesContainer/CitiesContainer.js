@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 // internal components
 import Aside from '../../components/Aside/Aside';
-import CityPosts from '../../components/CityPosts/CityPosts';
+//import CityPosts from '../../components/CityPosts/CityPosts';
 import { API_URL } from '../../constants';
 // styles
 import './CitiesContainer.css'
@@ -76,19 +76,7 @@ class CitiesContainer extends Component {
                 </div>
                 <div className="city-posts">
 
-                    {this.props.cityName
-                        ? <CityPosts
-                            name={this.state.cityAsProp.name}
-                            image={this.state.cityAsProp.image}
-                            posts={this.state.cityAsProp.posts}
-                            slug={this.state.cityAsProp.slug}
-                            cities={this.state.cities}
-                            users={this.state.users}
-                        />
-                        : <CityPosts
-                            name={this.state.defaultCity.name}
-                            image={this.state.defaultCity.image}
-                            posts={this.state.posts} />}
+                    
                 </div>
                 {this.props.addPost
                     && <div className="add-post">
