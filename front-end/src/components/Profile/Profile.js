@@ -1,9 +1,7 @@
 import React from 'react';
 import './Profile.css';
-import axios from 'axios';
-import { API_URL } from '../../constants';
 
-const Profile = ({ user: {image_url, username, email, current_city, date_joined, post } }) => {
+const Profile = ({ user: {image_url, username, email, current_city, date_joined } }) => {
 
     return (
         <div className="profile-page">
