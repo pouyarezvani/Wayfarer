@@ -3,7 +3,7 @@ import React from 'react';
 // Internal Components
 import Post from './Post/Post';
 
-const Posts = ({ posts, users, image, handleDelete, handleEdit }) => {
+const Posts = ({ posts, currentUser, image, handleDelete, handleEdit }) => {
 
     const postLinks = posts.map(post => {
         return (
@@ -15,8 +15,9 @@ const Posts = ({ posts, users, image, handleDelete, handleEdit }) => {
                 content={post.content}
                 image={image}
                 handleDelete={handleDelete}
-                handleEdit={handleEdit} />
-
+                handleEdit={handleEdit}
+                currentUser={currentUser}
+            />
         )
     });
 
