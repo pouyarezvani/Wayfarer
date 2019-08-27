@@ -25,7 +25,7 @@ class CitiesContainer extends Component {
         posts: [],
         cityAsProp: {},
         title: '',
-        content: ''
+        content: '',
 
     };
 
@@ -59,14 +59,13 @@ class CitiesContainer extends Component {
     };
 
     handleEdit = event => {
-        event.preventDefault()
-        console.log('click');
+        event.preventDefault();
         // editPost();
     }
     handleDelete = event => {
-        event.preventDefault()
-        console.log('click');
+        event.preventDefault();
         this.deletePost();
+        this.props.history.push(`/cities/${this.state.cityAsProp.slug}`);
     }
 
 
@@ -74,7 +73,6 @@ class CitiesContainer extends Component {
     getCurrentUserData = () => {
         axios.get(`${API_URL}/users/${this.props.currentUser}`)
             .then(response => {
-                console.log(response);
                 this.setState({
                     user: {
                         admin: response.data.data.admin,
@@ -83,7 +81,6 @@ class CitiesContainer extends Component {
                         username: response.data.data.username
                     }
                 })
-
             })
             .catch(error => console.log(error.response));
     }
@@ -98,14 +95,16 @@ class CitiesContainer extends Component {
 
     submitPost = event => {
         event.preventDefault();
+        const currentPosts = this.state.posts;
         axios.post(`${API_URL}/posts/`, {
             username: this.state.user.username,
-            city_slug: this.props.slug,
+            city_slug: this.props.cityName,
             title: this.state.title,
             content: this.state.content
         }, { withCredentials: true })
             .then(res => {
-                console.log(res);
+                currentPosts.push(res.data.data);
+                this.setState({ posts: currentPosts });
             })
             .catch(error => {
                 console.log(error.response);
@@ -115,13 +114,13 @@ class CitiesContainer extends Component {
     deletePost = event => {
         event.preventDefault();
         axios.delete(`${API_URL}/posts/${this.props.deletePost}`)
-            .then(response => console.log(response))
+            .then(response => this.getCities())
             .catch(error => console.log(error.response));
 
     }
 
     render() {
-        console.log(this.props);
+        console.log(this.props)
         return (
             <div className="cities-container">
                 {this.props.deletePost
@@ -139,6 +138,7 @@ class CitiesContainer extends Component {
                             currentUser={this.props.currentUser}
                             name={this.state.cityAsProp.name}
                             image={this.state.cityAsProp.image}
+                            description={this.state.cityAsProp.description}
                             posts={this.state.cityAsProp.posts}
                             slug={this.state.cityAsProp.slug}
                             postImage={this.state.user.image_url}

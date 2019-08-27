@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 // Styles
 import '../../CityPosts.css'
 
-const Post = ({ id, name, content, image, handleDelete, handleEdit }) => {
+const Post = ({ id, title, content, image, handleDelete, handleEdit }) => {
     return (
         <div className="post-box">
             <div>
@@ -16,7 +16,7 @@ const Post = ({ id, name, content, image, handleDelete, handleEdit }) => {
                 <img src={image} alt="city" />
             </div>
             <div className="post-box-content">
-                <h4>{name}</h4>
+                <h4>{title}</h4>
                 {content}
             </div>
             <Link key={id} to={`/post/${id}`} >
