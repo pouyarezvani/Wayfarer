@@ -10,18 +10,8 @@ import './CitiesContainer.css'
 
 class CitiesContainer extends Component {
     state = {
-        user: {
-            admin: Boolean,
-            email: '',
-            image_url: '',
-            username: ''
-        },
+        user: {},
         cities: [],
-        defaultCity: {
-            id: 1,
-            name: 'Chicago',
-            image: 'https://images.unsplash.com/photo-1470219556762-1771e7f9427d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80'
-        },
         posts: [],
         cityAsProp: {},
         title: '',
@@ -31,7 +21,7 @@ class CitiesContainer extends Component {
 
     componentDidMount() {
         if (this.props.cityName) {
-            return this.sendCityProp();
+            return this.setCityProp();
         };
         this.getCities();
         this.getCurrentUserData();
@@ -39,12 +29,15 @@ class CitiesContainer extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.cityName !== this.props.cityName) {
-            this.sendCityProp();
+            this.setCityProp();
+            this.getCities();
+        };
+        if (prevState.cityAsProp !== this.state.cityAsProp) {
             this.getCities();
         };
     };
 
-    sendCityProp = () => {
+    setCityProp = () => {
         this.state.cities.forEach(city => {
             if (city.slug === this.props.cityName) {
                 this.setState({ cityAsProp: city })
@@ -63,7 +56,6 @@ class CitiesContainer extends Component {
     }
     handleDelete = (event, id) => {
         event.preventDefault();
-        console.log('click');
         this.deletePost(event, id);
         this.getCities();
     }
@@ -73,14 +65,7 @@ class CitiesContainer extends Component {
     getCurrentUserData = () => {
         axios.get(`${API_URL}/users/${this.props.currentUser}`)
             .then(response => {
-                this.setState({
-                    user: {
-                        admin: response.data.data.admin,
-                        email: response.data.data.email,
-                        image_url: response.data.data.image_url,
-                        username: response.data.data.username
-                    }
-                })
+                this.setState({ user: response.data.data });
             })
             .catch(error => console.log(error.response));
     }
@@ -116,13 +101,15 @@ class CitiesContainer extends Component {
     deletePost = (event, id) => {
         event.preventDefault();
         axios.delete(`${API_URL}/posts/${id}`)
-            .then(response => this.getCities())
+            .then(response => {
+                this.getCities();
+                this.props.goBack();
+            })
             .catch(error => console.log(error.response));
 
     }
 
     render() {
-
         return (
             <div className="cities-container">
                 {this.props.deletePost
@@ -135,22 +122,15 @@ class CitiesContainer extends Component {
                 </div>
                 <div className="city-posts">
 
-                    {this.props.cityName
-                        ? <CityPosts
+                    {this.props.cityName &&
+                        <CityPosts
                             currentUser={this.props.currentUser}
-                            name={this.state.cityAsProp.name}
-                            image={this.state.cityAsProp.image}
-                            description={this.state.cityAsProp.description}
-                            posts={this.state.cityAsProp.posts}
-                            slug={this.state.cityAsProp.slug}
+                            cityAsProp={this.state.cityAsProp}
                             postImage={this.state.user.image_url}
                             handleDelete={this.handleDelete}
                             handleEdit={this.handleEdit}
                         />
-                        : <CityPosts
-                            name={this.state.defaultCity.name}
-                            image={this.state.defaultCity.image}
-                            posts={this.state.posts} />}
+                    }
                 </div>
 
                 {this.props.addPost
