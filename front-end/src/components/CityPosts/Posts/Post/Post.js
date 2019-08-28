@@ -3,15 +3,14 @@ import { Link } from 'react-router-dom';
 // Styles
 import '../../CityPosts.css'
 
-const Post = ({ id, title, content, image, currentUser }) => {
+const Post = ({ id, title, content, image, currentUser, handleDelete }) => {
     return (
         <div className="post-box">
             {currentUser &&
                 <div>
                     <i className="fas fa-pen-square"></i>
-                    <Link to={`/delete_post/${id}`}>
-                        <i className="fas fa-minus-circle"></i>
-                    </Link>
+                    <i onClick={event => handleDelete(event, id)} className="fas fa-minus-circle"></i>
+
                 </div>
             }
             <div className="post-box-image">

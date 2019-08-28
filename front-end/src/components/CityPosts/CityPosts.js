@@ -6,7 +6,7 @@ import Posts from './Posts/Posts';
 // Styles
 import './CityPosts.css';
 
-const CityPosts = ({ slug, description, posts, currentUser, name, image, postImage }) => {
+const CityPosts = ({ slug, description, posts, currentUser, name, image, postImage, handleDelete }) => {
     return (
         <div className="container">
             <CityHeader name={name} image={image} description={description} />
@@ -20,6 +20,7 @@ const CityPosts = ({ slug, description, posts, currentUser, name, image, postIma
                 currentUser={currentUser}
                 posts={posts}
                 image={postImage}
+                handleDelete={handleDelete}
             />}
             {/* {posts ? <Posts posts={posts} users={users} /> : 'Sorry, no posts have been created yet...'} */}
 

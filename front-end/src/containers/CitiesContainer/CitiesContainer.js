@@ -60,12 +60,12 @@ class CitiesContainer extends Component {
 
     handleEdit = event => {
         event.preventDefault();
-        // editPost();
     }
-    handleDelete = event => {
+    handleDelete = (event, id) => {
         event.preventDefault();
-        this.deletePost();
-        this.props.history.push(`/cities/${this.state.cityAsProp.slug}`);
+        console.log('click');
+        this.deletePost(event, id);
+        this.getCities();
     }
 
 
@@ -105,22 +105,24 @@ class CitiesContainer extends Component {
             .then(res => {
                 currentPosts.push(res.data.data);
                 this.setState({ posts: currentPosts });
+                this.getCities();
+                this.props.goBack();
             })
             .catch(error => {
                 console.log(error.response);
             });
     }
 
-    deletePost = event => {
+    deletePost = (event, id) => {
         event.preventDefault();
-        axios.delete(`${API_URL}/posts/${this.props.deletePost}`)
+        axios.delete(`${API_URL}/posts/${id}`)
             .then(response => this.getCities())
             .catch(error => console.log(error.response));
 
     }
 
     render() {
-        console.log(this.props)
+
         return (
             <div className="cities-container">
                 {this.props.deletePost
@@ -153,7 +155,7 @@ class CitiesContainer extends Component {
 
                 {this.props.addPost
                     && <div className="add-post">
-                        <Link to='/cities'>x</Link>
+                        <Link onClick={() => this.props.goBack()}>x</Link>
                         <form>
                             <label>Title</label>
                             <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
