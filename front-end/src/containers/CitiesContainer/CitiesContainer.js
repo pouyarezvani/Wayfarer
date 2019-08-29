@@ -74,6 +74,7 @@ class CitiesContainer extends Component {
         axios.get(`${API_URL}/cities`)
             .then(response => {
                 this.setState({ cities: response.data })
+                this.setState({ posts: this.state.cityAsProp.posts})
             })
             .catch(error => console.log(error));
     }
