@@ -1,13 +1,27 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans&display=swap');
-body{
-  margin: 0;
-  padding:0;
-  font-family: 'Open Sans', sans-serif;
-  box-sizing: border-box;
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    box-sizing: border-box;
 }
 
-h1{
-  margin:0;
-  padding:0;
-  font-family: 'Lato', sans-serif;
+h1 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+li {
+    text-decoration: none;
+}
+
+.cities-container a:hover{
+    text-decoration: none;
+    color:white;
+}
+
+i:hover{
+    cursor: pointer;
 }

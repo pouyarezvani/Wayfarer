@@ -10,28 +10,18 @@ import './CitiesContainer.css'
 
 class CitiesContainer extends Component {
     state = {
-        user: {
-            admin: Boolean,
-            email: '',
-            image_url: '',
-            username: ''
-        },
+        user: {},
         cities: [],
-        defaultCity: {
-            id: 1,
-            name: 'Chicago',
-            image: 'https://images.unsplash.com/photo-1470219556762-1771e7f9427d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80'
-        },
         posts: [],
         cityAsProp: {},
         title: '',
-        content: ''
+        content: '',
 
     };
 
     componentDidMount() {
         if (this.props.cityName) {
-            return this.sendCityProp();
+            return this.setCityProp();
         };
         this.getCities();
         this.getCurrentUserData();
@@ -39,12 +29,15 @@ class CitiesContainer extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.cityName !== this.props.cityName) {
-            this.sendCityProp();
+            this.setCityProp();
+            this.getCities();
+        };
+        if (prevState.cityAsProp !== this.state.cityAsProp) {
             this.getCities();
         };
     };
 
-    sendCityProp = () => {
+    setCityProp = () => {
         this.state.cities.forEach(city => {
             if (city.slug === this.props.cityName) {
                 this.setState({ cityAsProp: city })
@@ -59,14 +52,12 @@ class CitiesContainer extends Component {
     };
 
     handleEdit = event => {
-        event.preventDefault()
-        console.log('click');
-        // editPost();
+        event.preventDefault();
     }
-    handleDelete = event => {
-        event.preventDefault()
-        console.log('click');
-        this.deletePost();
+    handleDelete = (event, id) => {
+        event.preventDefault();
+        this.deletePost(event, id);
+        this.getCities();
     }
 
 
@@ -74,16 +65,7 @@ class CitiesContainer extends Component {
     getCurrentUserData = () => {
         axios.get(`${API_URL}/users/${this.props.currentUser}`)
             .then(response => {
-                console.log(response);
-                this.setState({
-                    user: {
-                        admin: response.data.data.admin,
-                        email: response.data.data.email,
-                        image_url: response.data.data.image_url,
-                        username: response.data.data.username
-                    }
-                })
-
+                this.setState({ user: response.data.data });
             })
             .catch(error => console.log(error.response));
     }
@@ -98,30 +80,36 @@ class CitiesContainer extends Component {
 
     submitPost = event => {
         event.preventDefault();
+        const currentPosts = this.state.posts;
         axios.post(`${API_URL}/posts/`, {
             username: this.state.user.username,
-            city_slug: this.props.slug,
+            city_slug: this.props.cityName,
             title: this.state.title,
             content: this.state.content
         }, { withCredentials: true })
             .then(res => {
-                console.log(res);
+                currentPosts.push(res.data.data);
+                this.setState({ posts: currentPosts });
+                this.getCities();
+                this.props.goBack();
             })
             .catch(error => {
                 console.log(error.response);
             });
     }
 
-    deletePost = event => {
+    deletePost = (event, id) => {
         event.preventDefault();
-        axios.delete(`${API_URL}/posts/${this.props.deletePost}`)
-            .then(response => console.log(response))
+        axios.delete(`${API_URL}/posts/${id}`)
+            .then(response => {
+                this.getCities();
+                this.props.goBack();
+            })
             .catch(error => console.log(error.response));
 
     }
 
     render() {
-        console.log(this.props);
         return (
             <div className="cities-container">
                 {this.props.deletePost
@@ -134,31 +122,25 @@ class CitiesContainer extends Component {
                 </div>
                 <div className="city-posts">
 
-                    {this.props.cityName
-                        ? <CityPosts
+                    {this.props.cityName &&
+                        <CityPosts
                             currentUser={this.props.currentUser}
-                            name={this.state.cityAsProp.name}
-                            image={this.state.cityAsProp.image}
-                            posts={this.state.cityAsProp.posts}
-                            slug={this.state.cityAsProp.slug}
+                            cityAsProp={this.state.cityAsProp}
                             postImage={this.state.user.image_url}
                             handleDelete={this.handleDelete}
                             handleEdit={this.handleEdit}
                         />
-                        : <CityPosts
-                            name={this.state.defaultCity.name}
-                            image={this.state.defaultCity.image}
-                            posts={this.state.posts} />}
+                    }
                 </div>
 
                 {this.props.addPost
                     && <div className="add-post">
-                        <Link to='/cities'>x</Link>
+                        <Link onClick={() => this.props.goBack()}>x</Link>
                         <form>
                             <label>Title</label>
                             <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
                             <label>Content</label>
-                            <input type="text" name="content" value={this.state.content} onChange={this.handleChange} />
+                            <input id="add-post-content" type="text" name="content" value={this.state.content} onChange={this.handleChange} />
                             <button onClick={this.submitPost}>Submit</button>
                         </form>
                     </div>

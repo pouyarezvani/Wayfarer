@@ -27,9 +27,9 @@ const Routes = ({ setCurrentUser, history, currentUser }) => {
             <Route path="/cities/:city_name" render={(props) => <CitiesContainer {...props} currentUser={currentUser} cityName={props.match.params.city_name} />} />
             <Route exact path="/cities" render={(props) => <CitiesContainer {...props} currentUser={currentUser} />} />
             <Route path="/delete_post/:id" render={(props) => <CitiesContainer {...props} currentUser={currentUser} deletePost={props.match.params.id} />} />
-            <Route exact path="/city/add_post/:slug" render={(props) => <CitiesContainer {...props} currentUser={currentUser} addPost={true} {...history} slug={props.match.params.slug} />} />
-            <Route path="/profile" 
-            render={(props) => <ProfileContainer {...props} currentUser={currentUser}  addPost={true} {...history} slug={props.match.params.slug} user_id={props.match.params.user_id} />} />
+            <Route exact path="/city/add_post/:city_name" render={(props) => <CitiesContainer {...props} currentUser={currentUser} addPost={true} {...history} cityName={props.match.params.city_name} />} />
+            <Route path="/profile"
+                render={(props) => <ProfileContainer {...props} currentUser={currentUser} addPost={true} {...history} slug={props.match.params.slug} user_id={props.match.params.user_id} />} />
             <Route path="/delete_post/:id" render={(props) => <ProfileContainer {...props} currentUser={currentUser} deletePost={props.match.params.id} />} />
         </Switch>
     );

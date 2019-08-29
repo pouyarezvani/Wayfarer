@@ -26,20 +26,6 @@ class ProfileContainer extends Component {
         this.deletePost();
     }
 
-    handleEdit = event => {
-        // event.preventDefault()
-        console.log(event.target)
-        this.handleEdit()
-    }
-
-    deletePost = (event) => {
-        event.preventDefault();
-        console.log(this);
-        axios.delete(`${API_URL}/posts/${this.props.deletePost}`)
-            .then(response => console.log(response))
-            .catch(error => console.log(error.response));
-    }
-
     componentDidMount() {
         this.getUserInfo();
         this.getPosts();

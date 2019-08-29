@@ -28,7 +28,6 @@ class Register extends Component {
         const newUser = this.state;
         axios.post(`${API_URL}/auth/signup`, newUser)
             .then(res => {
-                console.log(res);
                 this.props.history.push('/login')
             })
             .catch(error => {
@@ -40,7 +39,11 @@ class Register extends Component {
     render() {
         return (
             <div className="container signup">
-                <h2 className="register-header">Register</h2>
+                <div className="row">
+                    <div className="col-md-4">
+                        <h2>Register</h2>
+                    </div>
+                </div>
                 <div className="row text-center">
                     <div className="col-md-6 offset-md-3">
                         {this.state.shouldComponentDisplayErrors && this.state.errors.map((e, i) => (

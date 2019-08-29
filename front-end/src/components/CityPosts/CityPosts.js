@@ -6,10 +6,11 @@ import Posts from './Posts/Posts';
 // Styles
 import './CityPosts.css';
 
-const CityPosts = ({ currentUser, slug, posts, users, name, image, postImage, handleDelete, handleEdit }) => {
+const CityPosts = ({ currentUser, postImage, handleDelete,
+    cityAsProp: { name, image, description, posts, slug } }) => {
     return (
-        <>
-            <CityHeader name={name} image={image} />
+        <div className="container">
+            <CityHeader name={name} image={image} description={description} />
             <div className="posts-header">
                 <h2>Posts</h2>
                 {currentUser &&
@@ -19,14 +20,11 @@ const CityPosts = ({ currentUser, slug, posts, users, name, image, postImage, ha
             {posts && <Posts
                 currentUser={currentUser}
                 posts={posts}
-                users={users}
                 image={postImage}
                 handleDelete={handleDelete}
-                handleEdit={handleEdit}
             />}
-            {/* {posts ? <Posts posts={posts} users={users} /> : 'Sorry, no posts have been created yet...'} */}
+        </div>
 
-        </>
     );
 };
 
