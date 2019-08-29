@@ -26,13 +26,19 @@ class ProfileContainer extends Component {
         this.deletePost();
     }
 
-    // deletePost = (event) => {
-    //     event.preventDefault();
-    //     console.log(this);
-    //     axios.delete(`${API_URL}/posts/${this.props.deletePost}`)
-    //         .then(response => console.log(response))
-    //         .catch(error => console.log(error.response));
-    // }
+    handleEdit = event => {
+        // event.preventDefault()
+        console.log(event.target)
+        this.handleEdit()
+    }
+
+    deletePost = (event) => {
+        event.preventDefault();
+        console.log(this);
+        axios.delete(`${API_URL}/posts/${this.props.deletePost}`)
+            .then(response => console.log(response))
+            .catch(error => console.log(error.response));
+    }
 
     componentDidMount() {
         this.getUserInfo();
@@ -72,6 +78,7 @@ class ProfileContainer extends Component {
                         <h4>{foundPost.title} </h4>
                         <p>{foundPost.content}</p>
                         <p> Author: {foundPost.username}</p>
+                        <button onClick={this.handleEdit}>Edit Post</button>
                     </div>
                     ))}
                 </div>
