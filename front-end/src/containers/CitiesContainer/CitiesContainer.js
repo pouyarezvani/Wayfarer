@@ -55,7 +55,9 @@ class CitiesContainer extends Component {
     }
     handleDelete = (event, id) => {
         event.preventDefault();
+        console.log(id);
         this.deletePost(event, id);
+        this.setCityProp();
         this.getCities();
     }
 
@@ -73,7 +75,10 @@ class CitiesContainer extends Component {
         axios.get(`${API_URL}/cities`)
             .then(response => {
                 this.setState({ cities: response.data })
-                this.setState({ posts: this.state.cityAsProp.posts})
+                this.setState({ posts: this.state.cityAsProp.posts })
+                console.log(this.state.cityAsProp.posts)
+                console.log(this.state.posts)
+
             })
             .catch(error => console.log(error));
     }
@@ -98,13 +103,21 @@ class CitiesContainer extends Component {
             });
     }
 
+    updatePosts = id => {
+        let updatedPosts = this.state.cityAsProp.posts.filter(post => post._id !== id);
+        // this.state.cityAsProp.setState({ posts: updatedPosts });
+        this.setState({ posts: updatedPosts });
+        // this.cityAsProp.setState({ posts: updatedPosts });
+    }
+
     deletePost = (event, id) => {
-        // event.preventDefault();
+        event.preventDefault();
+        console.log(id);
         axios.delete(`${API_URL}/posts/${id}`)
             .then(response => {
-                let updatedPosts = this.state.cityAsProp.posts.filter(post => post._id !== id);
-                this.setState({ posts: updatedPosts})
                 this.getCities();
+                this.updatePosts(id);
+                // console.log(this.state.posts);
                 this.props.goBack();
             })
             .catch(error => console.log(error.response));
