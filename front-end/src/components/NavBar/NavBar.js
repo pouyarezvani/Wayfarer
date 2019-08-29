@@ -35,7 +35,7 @@ const NavBar = ({ logout, currentUser }) => {
     return (
         <nav>
             <div className="logo">
-                <Link className="nav-li" to="/" ><h1>Wayfarer</h1></Link>
+                <Link className="nav-li" to="/" ><h1>way.FR</h1></Link>
             </div>
             {currentUser ? authLinks : links}
         </nav>

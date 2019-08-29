@@ -16,3 +16,12 @@ h1 {
 li {
     text-decoration: none;
 }
+
+.cities-container a:hover{
+    text-decoration: none;
+    color:white;
+}
+
+i:hover{
+    cursor: pointer;
+}

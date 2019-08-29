@@ -51,6 +51,7 @@ class Home extends Component {
         this.setState({ index: hasGoneNegative ? this.images.length - 1 : prevIndex });
     };
 
+
     render() {
         return (
             <div className="home-body">
@@ -70,15 +71,15 @@ class Home extends Component {
                     <h1 className="heading">Wayfarer is..</h1>
                     <section className="home-content">
                         <div className="home-card">
-                            <h2>Topic</h2>
+                            <h2>San Francisco</h2>
                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptatibus facilis nostrum vero ipsum unde, odit magni consequatur in sed tempora vitae nulla laudantium ullam accusamus sit optio corporis et.</p>
                         </div>
                         <div className="home-card">
-                            <h2>Topic</h2>
+                            <h2>New York</h2>
                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptatibus facilis nostrum vero ipsum unde, odit magni consequatur in sed tempora vitae nulla laudantium ullam accusamus sit optio corporis et.</p>
                         </div>
                         <div className="home-card">
-                            <h2>Topic</h2>
+                            <h2>Jacksonville</h2>
                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptatibus facilis nostrum vero ipsum unde, odit magni consequatur in sed tempora vitae nulla laudantium ullam accusamus sit optio corporis et.</p>
                         </div>
                     </section>
