@@ -15,8 +15,7 @@ class CitiesContainer extends Component {
         posts: [],
         cityAsProp: {},
         title: '',
-        content: '',
-        deletedPost: []
+        content: ''
     };
 
     componentDidMount() {
@@ -133,7 +132,6 @@ class CitiesContainer extends Component {
                             postImage={this.state.user.image_url}
                             handleDelete={this.handleDelete}
                             handleEdit={this.handleEdit}
-                            refreshPosts={this.refreshPosts}
                         />
                     }
                 </div>

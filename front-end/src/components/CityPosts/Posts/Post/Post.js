@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 // Styles
 import '../../CityPosts.css'
 
-const Post = ({ id, title, content, image, currentUser, handleDelete, posts, city_slug }) => {
+const Post = ({ id, title, content, image, currentUser, handleDelete, city_slug }) => {
 
     return (
         <div className="post-box">
