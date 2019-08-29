@@ -15,6 +15,7 @@ const Posts = ({ posts, currentUser, image, handleDelete, handleEdit }) => {
                 content={post.content}
                 title={post.title}
                 image={image}
+                posts={posts}
                 handleDelete={handleDelete}
                 handleEdit={handleEdit}
                 currentUser={currentUser}

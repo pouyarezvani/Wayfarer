@@ -6,8 +6,8 @@ import Posts from './Posts/Posts';
 // Styles
 import './CityPosts.css';
 
-const CityPosts = ({ currentUser, postImage, handleDelete,
-    cityAsProp: { name, image, description, posts, slug } }) => {
+const CityPosts = ({ currentUser, postImage, handleDelete,  posts, 
+    cityAsProp: { name, image, description, slug } }) => {
     return (
         <div className="container">
             <CityHeader name={name} image={image} description={description} />

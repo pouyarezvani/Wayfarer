@@ -23,6 +23,7 @@ class ProfileContainer extends Component {
 
     handleDelete = event => {
         event.preventDefault()
+        console.log(event.target);
         this.deletePost();
     }
 

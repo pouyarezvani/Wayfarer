@@ -16,7 +16,7 @@ class CitiesContainer extends Component {
         cityAsProp: {},
         title: '',
         content: '',
-
+        deletedPost: []
     };
 
     componentDidMount() {
@@ -99,9 +99,11 @@ class CitiesContainer extends Component {
     }
 
     deletePost = (event, id) => {
-        event.preventDefault();
+        // event.preventDefault();
         axios.delete(`${API_URL}/posts/${id}`)
             .then(response => {
+                let updatedPosts = this.state.cityAsProp.posts.filter(post => post._id !== id);
+                this.setState({ posts: updatedPosts})
                 this.getCities();
                 this.props.goBack();
             })
@@ -126,9 +128,11 @@ class CitiesContainer extends Component {
                         <CityPosts
                             currentUser={this.props.currentUser}
                             cityAsProp={this.state.cityAsProp}
+                            posts={this.state.posts}
                             postImage={this.state.user.image_url}
                             handleDelete={this.handleDelete}
                             handleEdit={this.handleEdit}
+                            refreshPosts={this.refreshPosts}
                         />
                     }
                 </div>

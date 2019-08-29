@@ -3,14 +3,16 @@ import { Link } from 'react-router-dom';
 // Styles
 import '../../CityPosts.css'
 
-const Post = ({ id, title, content, image, currentUser, handleDelete }) => {
+const Post = ({ id, title, content, image, currentUser, handleDelete, posts, city_slug }) => {
+
     return (
         <div className="post-box">
             {currentUser &&
                 <div>
                     <i className="fas fa-pen-square"></i>
-                    <i onClick={event => handleDelete(event, id)} className="fas fa-minus-circle"></i>
-
+                    <i onClick={event => {
+                        handleDelete(event, id)
+                        } } className="fas fa-minus-circle"></i>
                 </div>
             }
             <div className="post-box-image">
@@ -20,7 +22,7 @@ const Post = ({ id, title, content, image, currentUser, handleDelete }) => {
                 <h4>{title}</h4>
                 {content}
             </div>
-            <Link key={id} to={`/post/${id}`} >
+            <Link key={id} to={`/post/${city_slug}`} >
                 <i className="fas fa-expand-arrows-alt"></i>
             </Link>
         </div>
